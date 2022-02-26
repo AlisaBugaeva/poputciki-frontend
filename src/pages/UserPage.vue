@@ -196,12 +196,12 @@
           My profile
         </li>
         <li
-          class="rounded-t w-32 h-12 flex items-center justify-center bg-gray-300 mx-1 text-sm text-gray-800"
+          class="rounded-t w-32 h-12 flex items-center justify-center bg-gray-300 hover:bg-white mx-1 text-sm text-gray-800"
         >
           My trips
         </li>
         <li
-          class="rounded-t w-32 h-12 flex items-center justify-center bg-gray-300 mr-1 text-sm text-gray-800"
+          class="rounded-t w-32 h-12 flex items-center justify-center bg-gray-300 hover:bg-white mr-1 text-sm text-gray-800"
         >
           My trip requests
         </li>
@@ -212,8 +212,77 @@
   <!-- Remove class [ h-64 ] when adding a card block -->
   <div class="container mx-auto px-6 mt-10 h-64">
     <!-- Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border -->
-    <div class="w-full h-full rounded border-dashed border-2 border-gray-300">
-      <!-- Place your content here -->
+<div class="w-full bg-white p-10">
+      <h1
+        tabindex="0"
+        role="heading"
+        aria-label="profile information"
+        class="focus:outline-none text-3xl font-bold text-gray-800 mt-1"
+      >
+        Profile info
+      </h1>
+      <div class="mt-8 md:flex items-center">
+        <div class="flex flex-col">
+          <label class="mb-3 text-sm leading-none text-gray-800"
+            >First name</label
+          >
+          <input
+            type="name"
+            tabindex="0"
+            aria-label="Enter first name"
+            class="w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"
+            value="Alice"
+          />
+        </div>
+        <div class="flex flex-col md:ml-12 md:mt-0 mt-8">
+          <label class="mb-3 text-sm leading-none text-gray-800"
+            >Last name</label
+          >
+          <input
+            type="name"
+            tabindex="0"
+            aria-label="Enter last name"
+            class="w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"
+            value="Bugaeva"
+          />
+        </div>
+      </div>
+      <div class="mt-12 md:flex items-center">
+        <div class="flex flex-col">
+          <label class="mb-3 text-sm leading-none text-gray-800"
+            >Email Address</label
+          >
+          <input
+            type="email"
+            tabindex="0"
+            aria-label="Enter email Address"
+            class="w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"
+            value="smith.william@gmail.com"
+          />
+        </div>
+        <div class="flex flex-col md:ml-12 md:mt-0 mt-8">
+          <label class="mb-3 text-sm leading-none text-gray-800"
+            >Phone number</label
+          >
+          <input
+            tabindex="0"
+            aria-label="Enter phone number"
+            class="w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"
+            value="89203560027"
+          />
+        </div>
+      </div>
+      <div class="mt-12">
+      </div>
+      <button
+        role="button"
+        aria-label="Next step"
+        class="flex items-center justify-center py-4 px-7 focus:outline-none bg-white border rounded border-gray-400 mt-7 md:mt-14 hover:bg-gray-100 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700"
+      >
+        <span class="text-sm font-medium text-center text-gray-800 capitalize"
+          >Edit info</span
+        >
+      </button>
     </div>
   </div>
 </template>
