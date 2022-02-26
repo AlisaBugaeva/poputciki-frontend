@@ -18,7 +18,11 @@
                 class="flex items-center relative cursor-pointer"
                 @click="dropdownHandler($event)"
               >
-                <p class="text-gray-800 text-sm mx-3">Make a trip</p>
+                <p
+                  class="text-gray-800 text-lg mx-3 text-gray-600 hover:text-indigo-700 cursor-pointer items-center"
+                >
+                  Make a trip
+                </p>
               </div>
             </div>
           </div>
@@ -54,7 +58,7 @@
                   </ul>
                   <div class="relative"></div>
                 </div>
-                <p class="text-gray-800 text-sm mx-3">Login</p>
+                <p class="text-gray-800 text-lg mx-3">Login</p>
                 <div class="cursor-pointer text-gray-600">
                   <svg
                     aria-haspopup="true"
@@ -88,48 +92,14 @@
               class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center"
             >
               <div class="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-user"
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <circle cx="12" cy="7" r="4" />
-                  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
-                </svg>
-                <span class="text-sm ml-2">My Profile</span>
+                <span class="text-sm ml-2">Sign in</span>
               </div>
             </li>
             <li
               class="flex w-full justify-between text-gray-600 hover:text-indigo-700 cursor-pointer items-center mt-2"
             >
               <div class="flex items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-logout"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <path
-                    d="M14 8v-2a2 2 0 0 0 -2 -2h-7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h7a2 2 0 0 0 2 -2v-2"
-                  />
-                  <path d="M7 12h14l-3 -3m0 6l3 -3" />
-                </svg>
-                <span class="text-sm ml-2">Sign out</span>
+                <span class="text-sm ml-2">Sign up</span>
               </div>
             </li>
           </ul>
@@ -165,38 +135,64 @@
               <thead>
                 <tr class="w-full h-16 border-gray-300 border-b py-8">
                   <th
-                    class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-center"
+                    class="text-black dark:text-gray-400 font-normal pr-6 text-center"
                   >
                     <div
                       class="w-full h-full hidden lg:flex items-center pl-6 pr-24"
                     >
-                      <div class="relative w-full">
-                        <div
-                          class="text-gray-500 absolute ml-4 inset-0 m-auto w-4 h-4"
-                        >
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="icon icon-tabler icon-tabler-search"
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            fill="none"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                          >
-                            <path stroke="none" d="M0 0h24v24H0z" />
-                            <circle cx="10" cy="10" r="7" />
-                            <line x1="21" y1="21" x2="15" y2="15" />
-                          </svg>
-                        </div>
-                        <input
-                          class="border border-gray-100 focus:outline-none focus:border-indigo-700 rounded w-full text-sm text-gray-500 bg-gray-100 pl-12 py-2"
-                          type="text"
-                          placeholder="Search"
-                        />
-                      </div>
+                      Searching trip
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex flex-col md:py-2 py-4 ">
+                      <label
+                        for="email1"
+                        class="text-gray-400 text-sm font-bold leading-tight tracking-normal mb-2"
+                      ></label>
+                      <input
+                        id="email1"
+                        class="text-gray-600 dark:text-gray-400 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 bg-white font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border shadow"
+                        placeholder="Departure point"
+                      />
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex flex-col md:py-0 py-4">
+                      <label
+                        for="email1"
+                        class="text-gray-400 text-sm font-bold leading-tight tracking-normal mb-2"
+                      ></label>
+                      <input
+                        id="email1"
+                        class="text-gray-600 dark:text-gray-400 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 bg-white font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border shadow"
+                        placeholder="Destination point"
+                      />
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex flex-col md:py-0 py-4">
+                      <label
+                        for="email1"
+                        class="text-gray-400 text-sm font-bold leading-tight tracking-normal mb-2"
+                      ></label>
+                      <input
+                        id="email1"
+                        class="text-gray-600 dark:text-gray-400 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 bg-white font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border shadow"
+                        placeholder="Departure date"
+                      />
+                    </div>
+                  </th>
+                  <th>
+                    <div class="flex flex-col md:py-0 py-4">
+                      <label
+                        for="email1"
+                        class="text-gray-400 text-sm font-bold leading-tight tracking-normal mb-2"
+                      ></label>
+                      <input
+                        id="email1"
+                        class="text-gray-600 dark:text-gray-400 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 bg-white font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border shadow"
+                        placeholder="Destination date"
+                      />
                     </div>
                   </th>
                 </tr>
@@ -404,10 +400,6 @@
             </div>
           </div>
 
-
-
-
-
           <div
             class="2xl:mx-auto 2xl:container 2xl:px-20 xl:px-12 sm:px-6 w-full bg-gradient-to-tl from-yellow-300 to-purple-600 pt-20"
           >
@@ -421,7 +413,7 @@
                 <div>
                   <div class="relative">
                     <img
-                      src="https://ru.wikipedia.org/wiki/%D0%9B%D0%B5%D1%81%D0%BD%D0%BE%D0%B9_%D0%BA%D0%BE%D1%82#/media/%D0%A4%D0%B0%D0%B9%D0%BB:Felis_silvestris_silvestris.jpg"
+                      src="https://lh3.googleusercontent.com/pDj9Hxj_5rX80NardiuFwa_GjrfWfW1GW63fR47BzRySPYuH1xe2f95Gnp-6qE6wmEtCLSsx0nL5doW9uryDLIiCKVPtkcYRi-qYQs53y1u_P_teOvq1DX2ClVZxTWZUsB_cgLA9BYMUKEPL4ulmJGLmFPSuGukDAw8kE5RzmEcs8l8pBY7qLRjbhNi1C3GFCoU7XPTxfH91YlLyuREDQgxH4x-X7LMXo6T6BC0HVyACERe4nqaVbmEzbxU5dRb1w1RQdf1x_rpFMhI8lbRkdmpcls7bB4tVz77kPdpEekcJPb-SjTLdZEXOSe-l8JJ9-L61PLx8H79NfCoouKEDo7qo0FtmCyZZDovlbxkFPFbtg-AZOBHkeUWw27oZeDV-LNnyf740C9dTHqIk_gnJgd9vbr7Hxq5e0yXfPYmA_WflbaGJiHdNfKJksmCPAZ16WoxeC43oFLQC7VGE1kbAvVtP6AFywP3VJZLn23Cv0SgVG999Wy6eA-UhoMWPj22fqpm4Po1hngm3fawpL6QBvCKYYH3fbbVdg8tmmpTdzu2DQaNA58NZi3ZTiCV5y6HhR_bsd_n7dYh03FABy6_7J5zk2TKya6DXYNTU6O9H7mjtLNvtE6qlx3Tswrem1TsYmrAC6UpXQp_r1A3pDDsr7ZJ_7Ilwguqow2Fc5DE9-RahbEQ7lhtMFjOT_7l0cYsQSYsSq3WxKdTmiaGAztMT4YpW=w1024-h512-no?authuser=0"
                       alt="Sochi"
                     />
                   </div>
@@ -433,17 +425,23 @@
                   <p
                     class="text-base leading-normal mt-4 sm:pr-20 md:pr-10 text-gray-50 dark:text-white"
                   >
-                    Sochi, a Russian city on the Black Sea, is known as a summer beach resort, and was host of the 2014 Winter Olympics. Its parks include the palm-filled Arboretum. It's also notable for 20th-century neoclassical buildings such as the columned Winter Theatre. Forested Sochi National Park is a 1,937-sq.-km protected area in the nearby Caucasus Mountains. Some 70 km inland, Krasnaya Polyana is a prominent ski resort.
+                    Sochi, a Russian city on the Black Sea, is known as a summer
+                    beach resort, and was host of the 2014 Winter Olympics. Its
+                    parks include the palm-filled Arboretum. It's also notable
+                    for 20th-century neoclassical buildings such as the columned
+                    Winter Theatre. Forested Sochi National Park is a
+                    1,937-sq.-km protected area in the nearby Caucasus
+                    Mountains. Some 70 km inland, Krasnaya Polyana is a
+                    prominent ski resort.
                   </p>
                 </div>
-                
+
                 <div class="mt-9">
                   <div class="relative">
                     <img
-                      src="https://i.ibb.co/8mP5tmS/img-2.png"
+                      src="https://lh3.googleusercontent.com/yqx7d_TMp7QzvKk7hgsvT7iAwCDJfVrQV_ExqeoLlQBiIpZathqiAxMFl6lyJj5vP9yLYOS6c7dQ169OC-Js5eqwyIRBpSiYfOZy52zdnY5ZakaqMM2LBCUBw6RwyF2k4aKiTpuyAdA16cydBhgabtZiwsLGfVqFU55O9irRqLy661KhvIszXyBl3PAxOFe0JDWEw7UhHnqr4qoUQSG-ZqktvQh74R5oE5VoTpV1amChH45M6Zu33qP-WWfc5Ys1eNleslViSs7fSFaMnNAfIBTtjn9e7a4VuBJbPXGcp65NeB8g6N-J5IRXy-zKLzclmTRMIBp-SjRBMKYdLu_Fu8LV7ielbe_JIz5xAmt8pAlsf3YTKxTAc4-pvhc60hBTV6Pez_OnPkgiMPE8v7vyHX_S39hcVxs6AAZz1blkbcQ60Md8K2kHmQEY6dS8u2TWv8dih5ItlodW1Z0FNIUuR4lyABKb41UKWcfC9wT5pbj9FinrE8CXrvVJT4j0vfu8JgE2BlUOz52saeDai1kdwfCUtI9fUOw_1DlJkNLncGEfSPCnWRQj4IHrSosr6UPXP4PcMXdQF4gkWbXq64woUUn3zejwWGYwV35Bu4JKvsFDS7570XUoFugZSv0DzX6xr7g7kfQvj37d6uY4KYuJfTdi_njVwGW0DFvbZVsrluUT36Sdgglqb0VOQ_Ulo0zqIJeZho5x8RDxBA_h_AJpWysO=w1162-h870-no?authuser=0"
                       alt="Voronezh"
                     />
-                
                   </div>
                   <h1
                     class="text-2xl font-semibold leading-7 sm:pr-20 mt-2 text-gray-50 dark:text-gray-50"
@@ -453,7 +451,14 @@
                   <p
                     class="text-base leading-normal mt-4 sm:pr-20 md:pr-10 text-gray-50 dark:text-white"
                   >
-                    Voronezh is a city on the Voronezh River in southwestern Russia. Landscaped Petrovsky Park is home to a bronze statue of Peter I. Housed in a baroque building, the Voronezh Regional Art Museum has collections of Ancient Egyptian art and several centuries of Russian paintings. The ship museum Goto Predestination recreates 18th-century naval life. Scarlet Sails park has pine trees, playgrounds and an outdoor theater.
+                    Voronezh is a city on the Voronezh River in southwestern
+                    Russia. Landscaped Petrovsky Park is home to a bronze statue
+                    of Peter I. Housed in a baroque building, the Voronezh
+                    Regional Art Museum has collections of Ancient Egyptian art
+                    and several centuries of Russian paintings. The ship museum
+                    Goto Predestination recreates 18th-century naval life.
+                    Scarlet Sails park has pine trees, playgrounds and an
+                    outdoor theater.
                   </p>
                 </div>
               </div>
@@ -461,10 +466,9 @@
                 <div>
                   <div class="relative">
                     <img
-                      src="https://i.ibb.co/DKg5zHT/img-3.png"
+                      src="https://lh3.googleusercontent.com/auIq9_Jz135mG4hsK4wizy_8eV3bLH7BnSNwqugNc1bFdqkCX2o237SYvz-tA5NZ5JcSXAwAJkyk-N7CjRExquF5IvfY2WcPj94vMXl6HlmAPbET7u9HnUQAKWGPWrUZROc2LaK4YkladPSk4Lr9xvJfifPbGRtyx05LiPZMFbnjyl3ORUkngYgthCY7yNsQpfDDa9hjmkyLnvRdc0Z7Zms6ZqVRlSlJprFjnTNhh5w4peAsBxC2GdQg9qb1uVYLzOh2dHt-avFaB_zMlAc-gchGxrA-o6l4GPBlofbKoJIpMunmztJt_8p3yCIzmNxnw4DeR6d9yI1yS02rkzzX6wB16R8ZTb6nM2ubzunowbTWyt7lRK7WjAEhR90w7equenkiyqPXJZ44OxZvtM26kIOWN3WoYMd20dNrZuzF7EwRLZah5vnudTgsLaP2m5CgA3rb1_iGxPjPVq9t06Gl6tJjM7cGkvOAeFheeHqMLawzfDM7qnnewdEWA-FdvutsYALDSPwyIpyfJIuHcghLfqUQZ_0G9K4MAfYIL4U3M5j6HNJ0qhdQDR1WjhmZ4qvFZ9gDauz5_cR79Jmne6edggJ6IyWr3311wqI749t-OwOFdrE72lpVlB7CnvVGTcXmxfv47IYwbb9YwDsXv4w_gG0Rxz5B3hYq0dH9FwDyiriiwD6uPNFssl9IjcD7rNlvobjRgWA5-RNy_PkASAWd8Hf5=w1162-h870-no?authuser=0"
                       alt="Nizhny Novgorod"
                     />
-                
                   </div>
 
                   <h1
@@ -475,18 +479,24 @@
                   <p
                     class="text-base leading-normal mt-4 sm:pr-20 md:pr-10 text-gray-50 dark:text-white"
                   >
-                   Nizhny Novgorod is a large city on the Volga River in western Russia. It’s known for its 16th-century Kremlin, ringed by 13 fortified towers, including the Dmitrovskaya Tower. Within the Kremlin’s walls is the green-spired Cathedral of the Archangel Michael, rebuilt in the 17th century. Nizhny Novgorod State Art Museum, housed in a grand building, exhibits Russian and European paintings and a collection of icons.
+                    Nizhny Novgorod is a large city on the Volga River in
+                    western Russia. It’s known for its 16th-century Kremlin,
+                    ringed by 13 fortified towers, including the Dmitrovskaya
+                    Tower. Within the Kremlin’s walls is the green-spired
+                    Cathedral of the Archangel Michael, rebuilt in the 17th
+                    century. Nizhny Novgorod State Art Museum, housed in a grand
+                    building, exhibits Russian and European paintings and a
+                    collection of icons.
                   </p>
                 </div>
                 <div class="mt-9">
                   <div class="relative">
                     <img
-                      src="https://i.ibb.co/dPBXFwY/img-4.png"
+                      src="https://lh3.googleusercontent.com/MYixC4vg8Q0ejsovegOSYE6Z-w2qdbEX26LPxToLWJTgE-20ZZmE-hxj8m0yPjFUaVgE9B0jd-r0hn3pq0tfkRukkyLLAPQ9Ae1tNyWjhD5XGNgrPvtaT2yKD_jVePRdwNBsg5ZPre7Lq447GcmZ5qlaWTMz755V9yRY86KN6KoKRpAzynvoVxjtgeXG_C3gMNmoWc3hJT4aljG5Vd03dpIewyvVOcLCYxc2L7D2rQ1a30bg7OWM1-hJAOar0jR8tjDlfnSMletWElmFIYZnke4IpnlcxA3rcuUHpEU7lx3HqW6vsVdiCX91MGHnNuL4h_ygOF-f5lrFkL9taWRNjV9J-MNCj1qZD2cXt1bJJ0WmUgc_GTVLlesqeCa8r3Xqmg_V8w3qDCFKRxZv8T9ww9Brr24x1RTBPw365KSAc1f-31NWvhGtUCA1eZ_-DkoGJ3Z5sl53MiyrL1ksxXb64zeSVoNCG4QKDzDcgf2JGj_0NU0Xef5vqD1bXp_BmqknRtGugpyD5OqVOIV7_W3rF9ltcrrfCuRmJs_6wT3cwhKQ6tPHhUawVOlSeujmwZB4ePvK3n_2n4NRg-2sePhkvdxs2qqKYx5O3WWp1DbMmqZBJip4liVDnk9-2yzFxfGOZmkFQlkZ27KzO2-0uotSD5egZyAbcmure_HwY47wkSR50vg5wAvtYZJ3rfniBap4laB3i7jmtjb49iYA0E39BSI5=w600-h400-no?authuser=0"
                       alt="Saint Petersburg"
                     />
-                   
                   </div>
-                  
+
                   <h1
                     class="text-2xl font-semibold leading-7 sm:pr-20 mt-2 text-gray-50 dark:text-gray-50"
                   >
@@ -495,163 +505,15 @@
                   <p
                     class="text-base leading-normal mt-4 sm:pr-20 md:pr-10 text-gray-50 dark:text-white"
                   >
-                    St. Petersburg is a Russian port city on the Baltic Sea. It was the imperial capital for 2 centuries, having been founded in 1703 by Peter the Great, subject of the city's iconic “Bronze Horseman” statue. It remains Russia's cultural center, with venues such as the Mariinsky Theatre hosting opera and ballet, and the State Russian Museum showcasing Russian art, from Orthodox icon paintings to Kandinsky works.
+                    St. Petersburg is a Russian port city on the Baltic Sea. It
+                    was the imperial capital for 2 centuries, having been
+                    founded in 1703 by Peter the Great, subject of the city's
+                    iconic “Bronze Horseman” statue. It remains Russia's
+                    cultural center, with venues such as the Mariinsky Theatre
+                    hosting opera and ballet, and the State Russian Museum
+                    showcasing Russian art, from Orthodox icon paintings to
+                    Kandinsky works.
                   </p>
-                </div>
-                
-              </div>
-            </div>
-          </div>
-
-          <div
-            class="w-full bg-gradient-to-tl from-yellow-300 to-purple-600 pt-20"
-          >
-            <div
-              class="mx-auto container bg-white dark:bg-gray-800 dark:bg-gray-800 shadow rounded"
-            >
-              <div class="w-full overflow-x-scroll xl:overflow-x-hidden">
-                <table class="min-w-full bg-white dark:bg-gray-800">
-                  <thead>
-                    <tr class="w-full h-16 border-gray-300 border-b py-8">
-                      <th
-                        class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-center"
-                      >
-                        Top of places
-                      </th>
-                    </tr>
-                  </thead>
-
-                  <thead>
-                    <tr class="w-full h-16 border-gray-300 border-b py-8">
-                      <th
-                        class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
-                      >
-                        City
-                      </th>
-                      <th
-                        class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
-                      >
-                        Description
-                      </th>
-                      <th
-                        class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
-                      >
-                        Photo
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr class="h-24 border-gray-300 border-b">
-                      <td
-                        class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                      >
-                        Kazan
-                      </td>
-                      <td
-                        class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                      >
-                        Kazan is a city in southwest Russia, on the banks of the
-                        Volga and Kazanka rivers. The capital of the Republic of
-                        Tatarstan, a semi-autonomous region, it's known for the
-                        centuries-old Kazan Kremlin, a fortified citadel
-                        containing museums and sacred sites. Kremlin landmarks
-                        include the tiered Tower of Soyembika, the blue-and-gold
-                        domed Annunciation Cathedral and the vast, colorful Kul
-                        Sharif Mosque.
-                      </td>
-                      <td
-                        class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                      >
-                        photo
-                      </td>
-                    </tr>
-
-                    <tr class="h-24 border-gray-300 border-b">
-                      <td
-                        class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                      >
-                        Nizhny Novgorod
-                      </td>
-                      <td
-                        class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                      >
-                        Nizhny Novgorod is a large city on the Volga River in
-                        western Russia. It’s known for its 16th-century Kremlin,
-                        ringed by 13 fortified towers, including the
-                        Dmitrovskaya Tower. Within the Kremlin’s walls is the
-                        green-spired Cathedral of the Archangel Michael, rebuilt
-                        in the 17th century. Nizhny Novgorod State Art Museum,
-                        housed in a grand building, exhibits Russian and
-                        European paintings and a collection of icons.
-                      </td>
-                      <td
-                        class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                      >
-                        photo
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div
-                class="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full"
-              >
-                <div
-                  class="w-full lg:w-2/3 flex flex-col lg:flex-row items-start lg:items-center justify-end"
-                >
-                  <div
-                    class="flex items-center lg:border-l lg:border-r border-gray-300 py-3 lg:py-0 lg:px-6"
-                  >
-                    <p
-                      class="text-base text-gray-600 dark:text-gray-400"
-                      id="page-view"
-                    >
-                      Viewing 1 - 2 of 6
-                    </p>
-                    <a
-                      class="text-gray-600 dark:text-gray-400 ml-2 border-transparent border cursor-pointer rounded"
-                      onclick="pageView(false)"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="icon icon-tabler icon-tabler-chevron-left"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <polyline points="15 6 9 12 15 18" />
-                      </svg>
-                    </a>
-                    <a
-                      class="text-gray-600 dark:text-gray-400 border-transparent border rounded focus:outline-none cursor-pointer"
-                      onclick="pageView(true)"
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        class="icon icon-tabler icon-tabler-chevron-right"
-                        width="20"
-                        height="20"
-                        viewBox="0 0 24 24"
-                        stroke-width="1.5"
-                        stroke="currentColor"
-                        fill="none"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <polyline points="9 6 15 12 9 18" />
-                      </svg>
-                    </a>
-                  </div>
-                  <div
-                    class="flex items-center lg:border-r border-gray-300 pb-3 lg:pb-0 lg:px-6"
-                  ></div>
                 </div>
               </div>
             </div>
