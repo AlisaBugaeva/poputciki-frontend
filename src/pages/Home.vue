@@ -103,11 +103,13 @@
             <table class="min-w-full bg-white dark:bg-gray-800">
               <thead>
                 <tr class="w-full h-16 border-gray-300 border-b py-8">
+                  
+                  <th></th>
                   <th
                     class="text-black dark:text-gray-400 font-normal pr-6 text-center"
                   >
                     <div
-                      class="w-full h-full hidden lg:flex items-center pl-6 pr-24"
+                      class="w-full font-bold h-full hidden lg:flex items-center pl-6 pr-24"
                     >
                       Searching trip
                     </div>
@@ -172,37 +174,37 @@
                   <th
                     class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
                   >
-                    Name
+                    <b>Name</b>
                   </th>
                   <th
                     class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
                   >
-                    Surname
+                    <b>Surname</b>
                   </th>
                   <th
                     class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
                   >
-                    Departure point
+                    <b>Departure point</b>
                   </th>
                   <th
                     class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
                   >
-                    Destination point
+                    <b>Destination point</b>
                   </th>
                   <th
                     class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
                   >
-                    Departure date
+                    <b>Departure date</b>
                   </th>
                   <th
                     class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
                   >
-                    Destination date
+                    <b>Destination date</b>
                   </th>
                   <th
                     class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
                   >
-                    Status
+                    <b>Status</b>
                   </th>
                 </tr>
               </thead>

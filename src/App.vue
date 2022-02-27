@@ -1,23 +1,24 @@
 <template>
-  <Home v-show="false" />
+  <Home v-show="true" />
   <Login v-show="false" />
   <Registration v-show="false" />
-  <UserPage v-show="true" />
+  <UserPageMyTrips v-if="false" />
 </template>
 
 <script>
 import Home from './pages/Home.vue';
 import Login from './pages/Login.vue';
 import Registration from './pages/Registration.vue';
-import UserPage from './pages/UserPage.vue';
+import UserPageMyTrips from './pages/UserPageMyTrips.vue';
+
 
 export default {
   name: "App",
   components: {
     Home,
-    UserPage,
     Login,
     Registration,
+    UserPageMyTrips,
   },
 };
 </script>
