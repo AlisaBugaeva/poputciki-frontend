@@ -103,13 +103,12 @@
             <table class="min-w-full bg-white dark:bg-gray-800">
               <thead>
                 <tr class="w-full h-16 border-gray-300 border-b py-8">
-                  
                   <th></th>
                   <th
                     class="text-black dark:text-gray-400 font-normal pr-6 text-center"
                   >
                     <div
-                      class="w-full font-bold h-full hidden lg:flex items-center pl-6 pr-24"
+                      class="w-full h-full hidden font-bold lg:flex items-center pl-6 pr-24"
                     >
                       Searching trip
                     </div>
