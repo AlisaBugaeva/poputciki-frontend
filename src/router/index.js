@@ -3,14 +3,9 @@ import { createRouter, createWebHistory } from "vue-router";
 import Login from "../pages/Login.vue";
 import Registration from "../pages/Registration.vue";
 import Home from "../pages/Home.vue";
+import UserPage from "../pages/UserPage.vue";
 
 const routes = [
-  {
-    path: "/",
-    redirect: {
-      name: "Login",
-    },
-  },
   {
     path: "/",
     name: "Home",
@@ -25,6 +20,11 @@ const routes = [
     path: "/registration",
     name: "Registration",
     component: Registration
+  },
+  {
+    path: "/userPage",
+    name: "UserPage",
+    component: UserPage
   },
 ];
 

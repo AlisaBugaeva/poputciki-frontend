@@ -36,6 +36,7 @@
               Name
             </lable>
             <input
+              v-model="name"
               aria-label="enter email adress"
               role="input"
               type="email"
@@ -47,6 +48,7 @@
               Surname
             </lable>
             <input
+              v-model="surname"
               aria-label="enter email adress"
               role="input"
               type="email"
@@ -58,6 +60,7 @@
               Phone number
             </lable>
             <input
+              v-model="phoneNumber"
               aria-label="enter email adress"
               role="input"
               type="email"
@@ -69,6 +72,7 @@
               Email
             </lable>
             <input
+              v-model="email"
               aria-label="enter email adress"
               role="input"
               type="email"
@@ -81,6 +85,7 @@
             </lable>
             <div class="relative flex items-center justify-center">
               <input
+                v-model="password"
                 aria-label="enter Password"
                 role="input"
                 type="password"
@@ -107,6 +112,7 @@
               role="button"
               aria-label="login"
               class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 text-sm font-semibold leading-none text-white focus:outline-none bg-indigo-700 border rounded hover:bg-indigo-600 py-4 w-full"
+              @click="signUp()"
             >
               Sign up
             </button>
@@ -117,6 +123,7 @@
               role="link"
               aria-label="Sign up here"
               class="hover:text-indigo-700 text-sm font-medium leading-none underline text-gray-800 cursor-pointer"
+              @click="signIn()"
             >
               Sign in here</span
             >
@@ -127,3 +134,31 @@
     </div>
   </div>
 </template>
+
+<script>
+import router from "../router"
+
+export default {
+  name: "Registration",
+  
+   data(){
+    return{
+      name:"",
+      surname:"",
+      phoneNumber:"",
+      email:"",
+      password:"",
+    };
+  },
+
+  methods: {
+    signUp(){
+      router.push({name: "Home"})
+    },
+
+    signIn(){
+      router.push({name: "Login"})
+    },
+  },
+};
+</script>
