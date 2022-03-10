@@ -10,9 +10,11 @@
             class="rounded-full h-10 w-10 object-cover"
             src="https://static.thenounproject.com/png/20477-200.png"
             alt="avatar"
+            @click="goHome()"
           />
           <h3
             class="text-base text-gray-800 font-bold tracking-normal leading-tight ml-3 hidden lg:block"
+            @click="goHome()"
           >
             Poputciki
           </h3>
@@ -591,6 +593,8 @@
 </template>
 
 <script>
+import router from "../router"
+
 export default {
   name: "LightWithTabs",
   data() {
@@ -645,6 +649,10 @@ export default {
     };
   },
   methods: {
+    goHome(){
+      router.push({name: "Home"})
+    },
+
     dropdownHandler(event) {
       let single = event.currentTarget.getElementsByTagName("ul")[0];
       single.classList.toggle("hidden");

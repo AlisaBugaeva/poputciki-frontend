@@ -70,6 +70,9 @@
               </div>
             </div>
           </div>
+          <div class="mt-8 text-red-600">
+            {{ error }}
+          </div>
           <div class="mt-8">
             <button
               role="button"
@@ -99,7 +102,8 @@
 </template>
 
 <script>
-import router from "../router"
+import router from "../router";
+import { doLogin } from "../api/api";
 
 export default {
   name: "Login",
@@ -108,12 +112,22 @@ export default {
     return{
       email:"",
       password:"",
+      error:"",
     };
   },
 
   methods: {
     login(){
-      router.push({name: "Home"})
+      doLogin(this.email,this.password,
+        () => {
+          //this.places = data;
+          router.push({name: "Home"})
+        },
+        (error) => {
+          this.error = error.message;
+        }
+      );
+      
     },
 
     signUp(){

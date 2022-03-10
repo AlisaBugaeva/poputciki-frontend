@@ -1,527 +1,380 @@
 <template>
-  <div class="flex flex-no-wrap bg-white">
-    <!-- Sidebar starts -->
-    <!-- Remove class [ hidden ] and replace [ sm:flex ] with [ flex ] -->
-    <!-- Sidebar ends -->
-    <div class="w-full">
-      <!-- Navigation starts -->
-      <nav class="w-full mx-auto bg-white shadow z-20 relative">
-        <div
-          class="justify-between container px-6 h-16 flex items-center lg:items-stretch mx-auto"
-        >
-          <div class="flex items-center">
-            <div class="mr-10 flex items-center">
-              <img
-                class="rounded-full h-10 w-10 object-cover"
-                src="https://static.thenounproject.com/png/20477-200.png"
-                alt="avatar"
-              />
-              <h3
-                class="text-base text-gray-800 font-bold tracking-normal leading-tight ml-3 hidden lg:block"
-              >
-                Poputciki
-              </h3>
-            </div>
-            <ul class="pr-32 xl:flex hidden items-center h-full">
-              <li
-                class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mx-10 tracking-normal relative"
-              >
-                Make a trip
-              </li>
-              <li
-                class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mr-10 tracking-normal"
-              >
-                Join the trip
-              </li>
-            </ul>
+  <div class="bg-gradient-to-tl from-yellow-300 to-purple-600 pb-10">
+    <!-- Navigation starts -->
+    <nav class="w-full mx-auto bg-white shadow z-20 relative">
+      <div
+        class="justify-between container px-6 h-16 flex items-center lg:items-stretch mx-auto"
+      >
+        <div class="flex items-center">
+          <div class="mr-10 flex items-center">
+            <img
+              class="rounded-full h-10 w-10 object-cover"
+              src="https://static.thenounproject.com/png/20477-200.png"
+              alt="avatar"
+            />
+            <h3
+              class="text-base text-gray-800 font-bold tracking-normal leading-tight ml-3 hidden lg:block"
+            >
+              Poputciki
+            </h3>
           </div>
-          <div class="h-full xl:flex hidden items-center justify-end">
-            <div class="h-full flex items-center">
+          <ul class="pr-32 xl:flex hidden items-center h-full">
+            <li
+              class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mx-10 tracking-normal relative"
+            >
+              Make a trip
+            </li>
+            <li
+              class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mr-10 tracking-normal"
+            >
+              Join the trip
+            </li>
+          </ul>
+        </div>
+        <div class="h-full xl:flex hidden items-center justify-end">
+          <div class="h-full flex items-center">
+            <div
+              class="w-32 pr-16 h-full flex items-center justify-end border-r"
+            ></div>
+            <div class="w-full h-full flex">
               <div
-                class="w-32 pr-16 h-full flex items-center justify-end border-r"
-              ></div>
-              <div class="w-full h-full flex">
-                <div
-                  aria-haspopup="true"
-                  class="cursor-pointer w-full flex items-center justify-end relative"
-                  @click="dropdownHandler($event)"
+                aria-haspopup="true"
+                class="cursor-pointer w-full flex items-center justify-end relative"
+                @click="dropdownHandler($event)"
+              >
+                <ul
+                  class="p-2 w-40 border-r bg-white absolute rounded z-40 left-0 shadow mt-64 hidden"
                 >
-                  <ul
-                    class="p-2 w-40 border-r bg-white absolute rounded z-40 left-0 shadow mt-64 hidden"
+                  <li
+                    class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none"
                   >
-                    <li
-                      class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none"
-                    >
-                      <div class="flex items-center">
-                        <span class="ml-2" @click="signIn()"> Sign in </span>
-                      </div>
-                    </li>
-                    <li
-                      class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center"
-                    >
-                      <span class="ml-2" @click="signUp()"> Sign up </span>
-                    </li>
-                  </ul>
-                  <img
-                    @click="userPage()"
-                    class="rounded-full h-10 w-10 object-cover"
-                    src="https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png"
-                    alt="avatar"
-                  />
-                  <p class="text-gray-800 text-sm ml-2">Login</p>
-                  <div class="cursor-pointer text-gray-600">
-                    <svg
-                      aria-haspopup="true"
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="icon icon-tabler icon-tabler-chevron-down"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <polyline points="6 9 12 15 18 9" />
-                    </svg>
-                  </div>
+                    <div class="flex items-center">
+                      <span class="ml-2" @click="signIn()"> Sign in </span>
+                    </div>
+                  </li>
+                  <li
+                    class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center"
+                  >
+                    <span class="ml-2" @click="signUp()"> Sign up </span>
+                  </li>
+                </ul>
+                <img
+                  @click="userPage()"
+                  class="rounded-full h-10 w-10 object-cover"
+                  src="https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png"
+                  alt="avatar"
+                />
+                <p class="text-gray-800 text-sm ml-2">Login</p>
+                <div class="cursor-pointer text-gray-600">
+                  <svg
+                    aria-haspopup="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-chevron-down"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </nav>
-      <!-- Navigation ends -->
+      </div>
+    </nav>
+    <!-- Navigation ends -->
+    <!-- Page title starts -->
+
+    <!-- Page title ends -->
+    <div class="container px-6 mx-auto">
       <!-- Remove class [ h-64 ] when adding a card block -->
-
-      <div class="w-full bg-gradient-to-tl from-yellow-300 to-purple-600 pt-20">
+      <div class="rounded shadow relative bg-white z-10 mt-8 mb-8 w-full">
         <div
-          class="mx-auto container bg-white dark:bg-gray-800 dark:bg-gray-800 shadow rounded"
+          class="bg-gray-200 dark:bg-gray-900 flex items-center justify-center"
+          style="font-family: 'Lato', sans-serif"
         >
-          <div class="w-full overflow-x-scroll xl:overflow-x-hidden">
-            <table class="min-w-full bg-white dark:bg-gray-800">
-              <thead>
-                <tr class="w-full h-16 border-gray-300 border-b py-8">
-                  <th></th>
-                  <th
-                    class="text-black dark:text-gray-400 font-normal pr-6 text-center"
-                  >
-                    <div
-                      class="w-full h-full hidden font-bold lg:flex items-center pl-6 pr-24"
-                    >
-                      Searching trip
-                    </div>
-                  </th>
-                  <th>
-                    <div>
-                      <button
-                        class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 focus:bg-gray-100 w-64 p-4 shadow rounded bg-white text-sm font-medium leading-none text-gray-800 flex items-center justify-between cursor-pointer"
-                        @click="show1 = !show1"
-                      >
-                        Departure point
-                        <div>
-                          <div class="" v-if="!show1" id="close">
-                            <svg
-                              width="10"
-                              height="6"
-                              viewBox="0 0 10 6"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M5.00016 0.666664L9.66683 5.33333L0.333496 5.33333L5.00016 0.666664Z"
-                                fill="#1F2937"
-                              />
-                            </svg>
-                          </div>
-                          <div v-if="show1" id="open">
-                            <svg
-                              width="10"
-                              height="6"
-                              viewBox="0 0 10 6"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M5.00016 5.33333L0.333496 0.666664H9.66683L5.00016 5.33333Z"
-                                fill="#1F2937"
-                              />
-                            </svg>
-                          </div>
-                        </div>
-                      </button>
-                      <div
-                        class="w-64 mt-2 p-4 bg-white shadow rounded"
-                        v-if="show1"
-                        id="dropdown"
-                      >
-                        <div
-                          v-for="p in places"
-                          :key="p.name"
-                          class="flex items-center justify-between"
-                        >
-                          <div class="flex items-center">
-                            <div class="pl-4 flex items-center">
-                              <div
-                                class="bg-gray-100 dark:bg-gray-800 border rounded-sm border-gray-200 dark:border-gray-700 w-3 h-3 flex flex-shrink-0 justify-center items-center relative"
-                              >
-                                <input
-                                  aria-labelledby="fb1"
-                                  type="radiobutton"
-                                  class="focus:opacity-100 radiobutton opacity-0 absolute cursor-pointer w-full h-full"
-                                />
-                                <div
-                                  class="check-icon hidden bg-indigo-700 text-white rounded-sm"
-                                >
-                                  <svg
-                                    class="icon icon-tabler icon-tabler-check"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="12"
-                                    height="12"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    fill="none"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                  >
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <path d="M5 12l5 5l10 -10" />
-                                  </svg>
-                                </div>
-                              </div>
-                              <p
-                                id="fb1"
-                                tabindex="0"
-                                class="focus:outline-none text-sm leading-normal ml-2 text-gray-800"
-                              >
-                                {{ p.name }}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                        <button
-                          class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none focus:bg-indigo-200 text-xs bg-indigo-100 hover:bg-indigo-200 rounded-md mt-6 font-medium py-2 w-full leading-3 text-indigo-700"
-                        >
-                          Select
-                        </button>
-                      </div>
-                    </div>
-                  </th>
-                  <th>
-                    <div>
-                      <button
-                        class="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 focus:bg-gray-100 w-64 p-4 shadow rounded bg-white text-sm font-medium leading-none text-gray-800 flex items-center justify-between cursor-pointer"
-                        @click="show = !show"
-                      >
-                        Destination point
-                        <div>
-                          <div class="" v-if="!show" id="close">
-                            <svg
-                              width="10"
-                              height="6"
-                              viewBox="0 0 10 6"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M5.00016 0.666664L9.66683 5.33333L0.333496 5.33333L5.00016 0.666664Z"
-                                fill="#1F2937"
-                              />
-                            </svg>
-                          </div>
-                          <div v-if="show" id="open">
-                            <svg
-                              width="10"
-                              height="6"
-                              viewBox="0 0 10 6"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M5.00016 5.33333L0.333496 0.666664H9.66683L5.00016 5.33333Z"
-                                fill="#1F2937"
-                              />
-                            </svg>
-                          </div>
-                        </div>
-                      </button>
-                      <div
-                        class="w-64 mt-2 p-4 bg-white shadow rounded"
-                        v-if="show"
-                        id="dropdown"
-                      >
-                        <div
-                          v-for="p in places"
-                          :key="p.name"
-                          class="flex items-center justify-between"
-                        >
-                          <div class="flex items-center">
-                            <div class="pl-4 flex items-center">
-                              <div
-                                class="bg-gray-100 dark:bg-gray-800 border rounded-sm border-gray-200 dark:border-gray-700 w-3 h-3 flex flex-shrink-0 justify-center items-center relative"
-                              >
-                                <input
-                                  aria-labelledby="fb1"
-                                  type="radiobutton"
-                                  class="focus:opacity-100 radiobutton opacity-0 absolute cursor-pointer w-full h-full"
-                                />
-                                <div
-                                  class="check-icon hidden bg-indigo-700 text-white rounded-sm"
-                                >
-                                  <svg
-                                    class="icon icon-tabler icon-tabler-check"
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    width="12"
-                                    height="12"
-                                    viewBox="0 0 24 24"
-                                    stroke-width="1.5"
-                                    stroke="currentColor"
-                                    fill="none"
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                  >
-                                    <path stroke="none" d="M0 0h24v24H0z" />
-                                    <path d="M5 12l5 5l10 -10" />
-                                  </svg>
-                                </div>
-                              </div>
-                              <p
-                                id="fb1"
-                                tabindex="0"
-                                class="focus:outline-none text-sm leading-normal ml-2 text-gray-800"
-                              >
-                                {{ p.name }}
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                        <button
-                          class="focus:ring-2 focus:ring-offset-2 focus:ring-indigo-700 focus:outline-none focus:bg-indigo-200 text-xs bg-indigo-100 hover:bg-indigo-200 rounded-md mt-6 font-medium py-2 w-full leading-3 text-indigo-700"
-                        >
-                          Select
-                        </button>
-                      </div>
-                    </div>
-                  </th>
-                  <th>
-                    <div class="flex flex-col md:py-0 py-4">
-                      <label
-                        for="email1"
-                        class="text-gray-400 text-sm font-bold leading-tight tracking-normal mb-2"
-                      ></label>
-                      <input
-                        id="email1"
-                        class="text-gray-600 dark:text-gray-400 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 bg-white font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border shadow"
-                        placeholder="Departure date"
-                      />
-                    </div>
-                  </th>
-                  <th>
-                    <div class="flex flex-col md:py-0 py-4">
-                      <label
-                        for="email1"
-                        class="text-gray-400 text-sm font-bold leading-tight tracking-normal mb-2"
-                      ></label>
-                      <input
-                        id="email1"
-                        class="text-gray-600 dark:text-gray-400 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 bg-white font-normal w-64 h-10 flex items-center pl-3 text-sm border-gray-300 rounded border shadow"
-                        placeholder="Destination date"
-                      />
-                    </div>
-                  </th>
-                </tr>
-              </thead>
-
-              <thead>
-                <tr class="w-full h-16 border-gray-300 border-b py-8">
-                  <th
-                    class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
-                  >
-                    <b>Name</b>
-                  </th>
-                  <th
-                    class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
-                  >
-                    <b>Surname</b>
-                  </th>
-                  <th
-                    class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
-                  >
-                    <b>Departure point</b>
-                  </th>
-                  <th
-                    class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
-                  >
-                    <b>Destination point</b>
-                  </th>
-                  <th
-                    class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
-                  >
-                    <b>Departure date</b>
-                  </th>
-                  <th
-                    class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
-                  >
-                    <b>Destination date</b>
-                  </th>
-                  <th
-                    class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
-                  >
-                    <b>Status</b>
-                  </th>
-                </tr>
-              </thead>
-              <tbody v-for="t in travels" :key="t.id">
-                <tr class="h-24 border-gray-300 border-b">
-                  <td
-                    class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                  >
-                    {{ t.name }}
-                  </td>
-                  <td
-                    class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                  >
-                    {{ t.surnsme }}
-                  </td>
-                  <td
-                    class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                  >
-                    {{ t.departurePoint }}
-                  </td>
-                  <td
-                    class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                  >
-                    {{ t.destinationPoint }}
-                  </td>
-                  <td
-                    class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                  >
-                    {{ t.departureDate }}
-                  </td>
-                  <td
-                    class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                  >
-                    {{ t.destinationDate }}
-                  </td>
-                  <td
-                    class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                  >
-                    {{ t.status }}
-                  </td>
-                  <td
-                    class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-                  >
-                    <button
-                      role="button"
-                      aria-label="login"
-                      class="focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-sm font-semibold leading-none text-white focus:outline-none bg-green-500 border rounded hover:bg-green-400 py-4 w-full"
-                    >
-                      Join
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="lg:mr-10 my-6 lg:my-0">
+            <h4 class="text-2xl font-bold leading-tight text-black mb-2">
+              Searching trips
+            </h4>
           </div>
-          <div
-            class="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full"
-          >
-            <div
-              class="w-full lg:w-2/3 flex flex-col lg:flex-row items-start lg:items-center justify-end"
-            >
-              <div
-                class="flex items-center lg:border-l lg:border-r border-gray-300 py-3 lg:py-0 lg:px-6"
-              >
-                <p
-                  class="text-base text-gray-600 dark:text-gray-400"
-                  id="page-view"
-                >
-                  Viewing 1 - 2 of 6
-                </p>
-                <a
-                  class="text-gray-600 dark:text-gray-400 ml-2 border-transparent border cursor-pointer rounded"
-                  onclick="pageView(false)"
+
+          <div class="flex md:flex-row flex-col items-center py-4 px-1">
+            <!-- Code block starts -->
+            <div class="flex flex-col md:mr-16">
+              <div class="relative">
+                <div
+                  class="absolute text-gray-600 dark:text-gray-400 flex items-center px-2 border-r dark:border-gray-700 h-full cursor-pointer"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="icon icon-tabler icon-tabler-chevron-left"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
+                    class="h-6 w-6"
                     fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <polyline points="15 6 9 12 15 18" />
-                  </svg>
-                </a>
-                <a
-                  class="text-gray-600 dark:text-gray-400 border-transparent border rounded focus:outline-none cursor-pointer"
-                  onclick="pageView(true)"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="icon icon-tabler icon-tabler-chevron-right"
-                    width="20"
-                    height="20"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
                     stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    stroke-width="2"
                   >
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <polyline points="9 6 15 12 9 18" />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+                    />
                   </svg>
-                </a>
-              </div>
-              <div
-                class="flex items-center lg:border-r border-gray-300 pb-3 lg:pb-0 lg:px-6"
-              ></div>
-            </div>
-          </div>
-
-          <div
-            class="2xl:mx-auto 2xl:container 2xl:px-20 xl:px-12 sm:px-6 w-full bg-gradient-to-tl from-yellow-300 to-purple-600 pt-20"
-          >
-            <h3
-              class="lg:text-4xl text-3xl font-semibold leading-9 text-white dark:text-gray-50"
-            >
-              Top of places
-            </h3>
-            <div
-              class="md:flex  justify-between mt-12"
-            >
-              <div 
-                v-for="p in places"
-                :key="p.name"
-              class="md:w-1/2 md:ml-6 lg:w-full">
-                <div>
-                  <div class="relative">
-                    <img :src="`${p.photo}`"
-                     :alt="`${p.name}`"
-                     />
-                  </div>
-                  <h1
-                    class="text-2xl font-semibold leading-7 sm:pr-20 mt-2 text-gray-50 dark:text-gray-50"
-                  >
-                    {{ p.name }}
-                  </h1>
-                  <p
-                    class="text-base leading-normal mt-4 sm:pr-20 md:pr-10 text-gray-50 dark:text-white"
-                  >
-                    {{ p.info }}
-                  </p>
                 </div>
+                <input
+                  id="departure"
+                  class="text-gray-600 dark:text-gray-400 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 bg-white font-normal w-64 h-10 flex items-center pl-12 text-sm border-gray-300 rounded border shadow"
+                  placeholder="Starting from..."
+                  @input="(e) => (query = e.target.value)"
+                  :value="query"
+                />
               </div>
-              
+            </div>
+
+            <div>
+              <div v-for="p in searchPlaces" :key="p.city">
+                <p>{{ p.city }}</p>
+              </div>
+            </div>
+            <!-- Code block ends -->
+            <!-- Code block starts -->
+            <div class="flex flex-col md:mr-16 md:py-0 py-1">
+              <div class="relative">
+                <div
+                  class="absolute text-gray-600 dark:text-gray-400 flex items-center px-2 border-r dark:border-gray-700 h-full cursor-pointer"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+                    />
+                  </svg>
+                </div>
+                <input
+                  id="destination"
+                  class="text-gray-600 dark:text-gray-400 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 bg-white font-normal w-64 h-10 flex items-center pl-12 text-sm border-gray-300 rounded border shadow"
+                  placeholder="Going to..."
+                />
+              </div>
+            </div>
+            <!-- Code block ends -->
+            <!-- Code block starts -->
+            <div class="flex flex-col md:py-0 py-1">
+              <div class="relative">
+                <div
+                  class="absolute text-gray-600 dark:text-gray-400 flex items-center px-2 border-r dark:border-gray-700 h-full cursor-pointer"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+                <input
+                  class="text-gray-600 dark:text-gray-400 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 bg-white font-normal w-64 h-10 flex items-center pl-16 text-sm border-gray-300 rounded border shadow"
+                  placeholder="Today"
+                />
+              </div>
+            </div>
+            <div class="flex flex-col md:py-1 py-1">
+              <div class="relative px-4">
+                <button
+                  class="focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-sm leading-none text-white py-3 px-5 bg-gray-500 rounded hover:bg-gray-200 focus:outline-none"
+                >
+                  Search
+                </button>
+              </div>
+            </div>
+            <!-- Code block ends -->
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page title ends -->
+    <div class="container px-6 mx-auto mt-10">
+      <!-- Remove class [ h-64 ] when adding a card block -->
+      <div class="rounded shadow relative bg-white z-10 -mt-8 mb-8 w-full">
+        <div
+          class="mt-7 overflow-x-auto items-center justify-center py-3 px-10"
+        >
+          <table class="w-full whitespace-nowrap">
+            <tbody v-for="t in travels" :key="t.id">
+              <tr class="h-3"></tr>
+              <tr
+                tabindex="0"
+                class="focus:outline-none h-16 border border-gray-100 rounded"
+              >
+                <td class="pr-6 whitespace-no-wrap">
+                  <div class="flex items-center">
+                    <div class="h-8 w-8">
+                      <img
+                        src="https://tuk-cdn.s3.amazonaws.com/assets/components/advance_tables/at_1.png"
+                        alt=""
+                        class="h-full w-full rounded-full overflow-hidden shadow"
+                      />
+                    </div>
+                    <p
+                      class="ml-2 text-gray-800 dark:text-gray-100 tracking-normal leading-4 text-sm"
+                    >
+                      {{ t.name }} {{ t.surname }}
+                    </p>
+                  </div>
+                </td>
+                <td class="">
+                  <div class="flex items-center pl-5">
+                    <p
+                      class="text-base font-medium leading-none text-gray-700 mr-2"
+                    >
+                      {{ t.start }} -> {{ t.finish }}
+                    </p>
+                  </div>
+                </td>
+
+                <td
+                  class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
+                >
+                  <div class="flex items-center pl-5">
+                    <p
+                      class="text-base font-medium leading-none text-gray-700 mr-2"
+                    >
+                      {{ t.startDate }} -> {{ t.finishDate }}
+                    </p>
+                  </div>
+                </td>
+                <td
+                  class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
+                >
+                  {{ t.status }}
+                </td>
+                <td class="pl-5">
+                  <button
+                    class="focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none"
+                  >
+                    Join
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div
+          class="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full"
+        >
+          <div
+            class="w-full lg:w-2/3 flex flex-col lg:flex-row items-start lg:items-center justify-end"
+          >
+            <div
+              class="flex items-center lg:border-l lg:border-r border-gray-300 py-3 lg:py-0 lg:px-6"
+            >
+              <p
+                class="text-base text-gray-600 dark:text-gray-400"
+                id="page-view"
+              >
+                Viewing 1 - 2 of 6
+              </p>
+              <a
+                class="text-gray-600 dark:text-gray-400 ml-2 border-transparent border cursor-pointer rounded"
+                onclick="pageView(false)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-chevron-left"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <polyline points="15 6 9 12 15 18" />
+                </svg>
+              </a>
+              <a
+                class="text-gray-600 dark:text-gray-400 border-transparent border rounded focus:outline-none cursor-pointer"
+                onclick="pageView(true)"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-chevron-right"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <polyline points="9 6 15 12 9 18" />
+                </svg>
+              </a>
+            </div>
+            <div
+              class="flex items-center lg:border-r border-gray-300 pb-3 lg:pb-0 lg:px-6"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page title ends -->
+    <div class="container px-6 mx-auto mt-10">
+      <!-- Remove class [ h-64 ] when adding a card block -->
+      <div
+        class="rounded shadow relative bg-white z-10 mt-8 mb-8 w-full py-10 px-10"
+      >
+        <h3
+          class="lg:text-2xl text-2xl font-semibold leading-9 text-black dark:text-gray-50"
+        >
+          Top of places
+        </h3>
+        <div class="md:flex justify-between mt-12">
+          <div
+            v-for="p in places"
+            :key="p.name"
+            class="md:w-1/2 md:ml-6 lg:w-full"
+          >
+            <div>
+              <div class="relative">
+                <img :src="`${p.photo}`" :alt="`${p.name}`" />
+              </div>
+              <h1
+                class="text-2xl font-semibold leading-7 sm:pr-20 mt-2 text-gray-800 dark:text-gray-50"
+              >
+                {{ p.city }}
+              </h1>
+              <p
+                class="text-base leading-normal mt-4 sm:pr-20 md:pr-10 text-gray-500 dark:text-white"
+              >
+                {{ p.description }}
+              </p>
             </div>
           </div>
         </div>
@@ -532,12 +385,64 @@
 
 <script>
 import router from "../router";
+import { getTop5Places, getNewTrips } from "../api/api";
+
+require('vue-events')
 
 export default {
-  name: "Home",
+  name: "Home2",
+
+  mounted() {
+    console.log(`the component is now mounted.`),
+      getTop5Places(
+        (data) => {
+          this.places = data;
+        },
+        (error) => {
+          this.error = error.message;
+        }
+      );
+
+    getNewTrips(
+      (data) => {
+        this.travels = data;
+      },
+      (error) => {
+        this.error = error.message;
+      }
+    );
+
+    /*findPlace(
+      (data) => {
+        this.searchPlaces = data;
+      },
+      (error) => {
+        this.error = error.message;
+      }
+    );*/
+
+    /*tripSearch(
+      (data) => {
+        this.travels = data;
+      },
+      (error) => {
+        this.error = error.message;
+      }
+    );*/
+  },
+
+  watch: {
+    query() {
+      if (this.updateTimeout) {
+        clearTimeout(this.updateTimeout);
+        this.updateTimeout = null;
+      }
+      this.updateTimeout = setTimeout(this.updateResults, 200);
+    },
+  },
 
   data() {
-    const Holland = {
+    /*const Holland = {
       id: 1,
       name: "Tom",
       surnsme: "Holland",
@@ -561,31 +466,36 @@ export default {
     const Sochi = {
       name: "Sochi",
       photo:
-        "https://lh3.googleusercontent.com/pDj9Hxj_5rX80NardiuFwa_GjrfWfW1GW63fR47BzRySPYuH1xe2f95Gnp-6qE6wmEtCLSsx0nL5doW9uryDLIiCKVPtkcYRi-qYQs53y1u_P_teOvq1DX2ClVZxTWZUsB_cgLA9BYMUKEPL4ulmJGLmFPSuGukDAw8kE5RzmEcs8l8pBY7qLRjbhNi1C3GFCoU7XPTxfH91YlLyuREDQgxH4x-X7LMXo6T6BC0HVyACERe4nqaVbmEzbxU5dRb1w1RQdf1x_rpFMhI8lbRkdmpcls7bB4tVz77kPdpEekcJPb-SjTLdZEXOSe-l8JJ9-L61PLx8H79NfCoouKEDo7qo0FtmCyZZDovlbxkFPFbtg-AZOBHkeUWw27oZeDV-LNnyf740C9dTHqIk_gnJgd9vbr7Hxq5e0yXfPYmA_WflbaGJiHdNfKJksmCPAZ16WoxeC43oFLQC7VGE1kbAvVtP6AFywP3VJZLn23Cv0SgVG999Wy6eA-UhoMWPj22fqpm4Po1hngm3fawpL6QBvCKYYH3fbbVdg8tmmpTdzu2DQaNA58NZi3ZTiCV5y6HhR_bsd_n7dYh03FABy6_7J5zk2TKya6DXYNTU6O9H7mjtLNvtE6qlx3Tswrem1TsYmrAC6UpXQp_r1A3pDDsr7ZJ_7Ilwguqow2Fc5DE9-RahbEQ7lhtMFjOT_7l0cYsQSYsSq3WxKdTmiaGAztMT4YpW=w1024-h512-no?authuser=0",
+        "http://localhost:8081/img/Sochi.jpg",
       info: "Sochi, a Russian city on the Black Sea, is known as a summer beach resort, and was host of the 2014 Winter Olympics. Its parks include the palm-filled Arboretum. It's also notable for 20th-century neoclassical buildings such as the columned Winter Theatre. Forested Sochi National Park is a 1,937-sq.-km protected area in the nearby Caucasus Mountains. Some 70 km inland, Krasnaya Polyana is a prominent ski resort.",
     };
     const Voronezh = {
       name: "Voronezh",
       photo:
-        "https://lh3.googleusercontent.com/yqx7d_TMp7QzvKk7hgsvT7iAwCDJfVrQV_ExqeoLlQBiIpZathqiAxMFl6lyJj5vP9yLYOS6c7dQ169OC-Js5eqwyIRBpSiYfOZy52zdnY5ZakaqMM2LBCUBw6RwyF2k4aKiTpuyAdA16cydBhgabtZiwsLGfVqFU55O9irRqLy661KhvIszXyBl3PAxOFe0JDWEw7UhHnqr4qoUQSG-ZqktvQh74R5oE5VoTpV1amChH45M6Zu33qP-WWfc5Ys1eNleslViSs7fSFaMnNAfIBTtjn9e7a4VuBJbPXGcp65NeB8g6N-J5IRXy-zKLzclmTRMIBp-SjRBMKYdLu_Fu8LV7ielbe_JIz5xAmt8pAlsf3YTKxTAc4-pvhc60hBTV6Pez_OnPkgiMPE8v7vyHX_S39hcVxs6AAZz1blkbcQ60Md8K2kHmQEY6dS8u2TWv8dih5ItlodW1Z0FNIUuR4lyABKb41UKWcfC9wT5pbj9FinrE8CXrvVJT4j0vfu8JgE2BlUOz52saeDai1kdwfCUtI9fUOw_1DlJkNLncGEfSPCnWRQj4IHrSosr6UPXP4PcMXdQF4gkWbXq64woUUn3zejwWGYwV35Bu4JKvsFDS7570XUoFugZSv0DzX6xr7g7kfQvj37d6uY4KYuJfTdi_njVwGW0DFvbZVsrluUT36Sdgglqb0VOQ_Ulo0zqIJeZho5x8RDxBA_h_AJpWysO=w1162-h870-no?authuser=0",
+        "http://localhost:8081/img/Voronezh.jpg",
       info: "Voronezh is a city on the Voronezh River in southwestern Russia. Landscaped Petrovsky Park is home to a bronze statue of Peter I. Housed in a baroque building, the Voronezh Regional Art Museum has collections of Ancient Egyptian art and several centuries of Russian paintings. The ship museum Goto Predestination recreates 18th-century naval life. Scarlet Sails park has pine trees, playgrounds and an outdoor theater.",
     };
-    const NizhnyNovgorod ={
+    const NizhnyNovgorod = {
       name: "Nizhny Novgorod",
-      photo: "https://lh3.googleusercontent.com/auIq9_Jz135mG4hsK4wizy_8eV3bLH7BnSNwqugNc1bFdqkCX2o237SYvz-tA5NZ5JcSXAwAJkyk-N7CjRExquF5IvfY2WcPj94vMXl6HlmAPbET7u9HnUQAKWGPWrUZROc2LaK4YkladPSk4Lr9xvJfifPbGRtyx05LiPZMFbnjyl3ORUkngYgthCY7yNsQpfDDa9hjmkyLnvRdc0Z7Zms6ZqVRlSlJprFjnTNhh5w4peAsBxC2GdQg9qb1uVYLzOh2dHt-avFaB_zMlAc-gchGxrA-o6l4GPBlofbKoJIpMunmztJt_8p3yCIzmNxnw4DeR6d9yI1yS02rkzzX6wB16R8ZTb6nM2ubzunowbTWyt7lRK7WjAEhR90w7equenkiyqPXJZ44OxZvtM26kIOWN3WoYMd20dNrZuzF7EwRLZah5vnudTgsLaP2m5CgA3rb1_iGxPjPVq9t06Gl6tJjM7cGkvOAeFheeHqMLawzfDM7qnnewdEWA-FdvutsYALDSPwyIpyfJIuHcghLfqUQZ_0G9K4MAfYIL4U3M5j6HNJ0qhdQDR1WjhmZ4qvFZ9gDauz5_cR79Jmne6edggJ6IyWr3311wqI749t-OwOFdrE72lpVlB7CnvVGTcXmxfv47IYwbb9YwDsXv4w_gG0Rxz5B3hYq0dH9FwDyiriiwD6uPNFssl9IjcD7rNlvobjRgWA5-RNy_PkASAWd8Hf5=w1162-h870-no?authuser=0",
-      info: "Nizhny Novgorod is a large city on the Volga River in western Russia. It’s known for its 16th-century Kremlin, ringed by 13 fortified towers, including the Dmitrovskaya Tower. Within the Kremlin’s walls is the green-spired Cathedral of the Archangel Michael, rebuilt in the 17th century. Nizhny Novgorod State Art Museum, housed in a grand building, exhibits Russian and European paintings and a collection of icons."
+      photo:
+        "http://localhost:8081/img/Nizhny%20Novgorod.jpg",
+      info: "Nizhny Novgorod is a large city on the Volga River in western Russia. It’s known for its 16th-century Kremlin, ringed by 13 fortified towers, including the Dmitrovskaya Tower. Within the Kremlin’s walls is the green-spired Cathedral of the Archangel Michael, rebuilt in the 17th century. Nizhny Novgorod State Art Museum, housed in a grand building, exhibits Russian and European paintings and a collection of icons.",
     };
-    const SaintPetersburg ={
-      name:"Saint Petersburg",
-      photo: "https://lh3.googleusercontent.com/MYixC4vg8Q0ejsovegOSYE6Z-w2qdbEX26LPxToLWJTgE-20ZZmE-hxj8m0yPjFUaVgE9B0jd-r0hn3pq0tfkRukkyLLAPQ9Ae1tNyWjhD5XGNgrPvtaT2yKD_jVePRdwNBsg5ZPre7Lq447GcmZ5qlaWTMz755V9yRY86KN6KoKRpAzynvoVxjtgeXG_C3gMNmoWc3hJT4aljG5Vd03dpIewyvVOcLCYxc2L7D2rQ1a30bg7OWM1-hJAOar0jR8tjDlfnSMletWElmFIYZnke4IpnlcxA3rcuUHpEU7lx3HqW6vsVdiCX91MGHnNuL4h_ygOF-f5lrFkL9taWRNjV9J-MNCj1qZD2cXt1bJJ0WmUgc_GTVLlesqeCa8r3Xqmg_V8w3qDCFKRxZv8T9ww9Brr24x1RTBPw365KSAc1f-31NWvhGtUCA1eZ_-DkoGJ3Z5sl53MiyrL1ksxXb64zeSVoNCG4QKDzDcgf2JGj_0NU0Xef5vqD1bXp_BmqknRtGugpyD5OqVOIV7_W3rF9ltcrrfCuRmJs_6wT3cwhKQ6tPHhUawVOlSeujmwZB4ePvK3n_2n4NRg-2sePhkvdxs2qqKYx5O3WWp1DbMmqZBJip4liVDnk9-2yzFxfGOZmkFQlkZ27KzO2-0uotSD5egZyAbcmure_HwY47wkSR50vg5wAvtYZJ3rfniBap4laB3i7jmtjb49iYA0E39BSI5=w600-h400-no?authuser=0",
-      info:"St. Petersburg is a Russian port city on the Baltic Sea. It was the imperial capital for 2 centuries, having been founded in 1703 by Peter the Great, subject of the city's iconic “Bronze Horseman” statue. It remains Russia's cultural center, with venues such as the Mariinsky Theatre hosting opera and ballet, and the State Russian Museum showcasing Russian art, from Orthodox icon paintings to Kandinsky works."
-    };
-
+    const SaintPetersburg = {
+      name: "Saint Petersburg",
+      photo:
+        "http://localhost:8081/img/Saint%20Petersburg.jpg",
+      info: "St. Petersburg is a Russian port city on the Baltic Sea. It was the imperial capital for 2 centuries, having been founded in 1703 by Peter the Great, subject of the city's iconic “Bronze Horseman” statue. It remains Russia's cultural center, with venues such as the Mariinsky Theatre hosting opera and ballet, and the State Russian Museum showcasing Russian art, from Orthodox icon paintings to Kandinsky works.",
+    };*/
 
     return {
-      travels: [Holland, Felton],
+      travels: [],
 
-      places: [Sochi, Voronezh,NizhnyNovgorod,SaintPetersburg],
+      places: [],
+      searchPlaces: [],
+
+      query: "",
+      updateTimeout: null,
 
       show: false,
       show1: false,
@@ -596,6 +506,18 @@ export default {
   },
 
   methods: {
+    updateResults() {
+      this.query = this.query.trim();
+      if (this.query.length <= 0) {
+        this.searchPlaces = [];
+        return;
+      }
+
+      this.$api.get(`/places?name=${encodeURI(this.query)}`).then((res) => {
+        this.searchPlaces = res.data.data;
+      });
+    },
+
     signIn() {
       router.push({ name: "Login" });
     },
@@ -621,89 +543,37 @@ export default {
 </script>
 
 <style scoped>
-.checkbox:checked + .check-icon {
-  display: flex;
-}
+
+  .results {
+    background-color: white;
+    max-height: 300px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .result {
+      position: relative;
+      background-color: white;
+      height: 32px;
+      cursor: pointer;
+      transition: all .2s;
+      color: rgb(50, 50, 50);
+
+      &:hover {
+        background-color: rgb(240, 240, 240);
+      }
+
+      p {
+        width: 100%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        padding-left: 15px;
+      }
+    }
+  }
+
 </style>
-<!-- Navigation ends 
-<script>
-export default {
-    name: "CompactTableWithActionsAndect",
-    data() {
-        return {
-            temp: 0,
-        };
-    },
-    methods: {
-        dropdownFunction(event) {
-            var dropdowns = document.getElementsByClassName("dropdown-content");
-            var i;
-            let list = event.currentTarget.parentElement.parentElement.getElementsByClassName("dropdown-content")[0];
-            for (i = 0; i < dropdowns.length; i++) {
-                dropdowns[i].classList.add("hidden");
-            }
-            list.classList.toggle("hidden");
-        },
-        documentClick(event) {
-            if (!event.target.matches(".dropbtn")) {
-                var dropdowns = document.getElementsByClassName("dropdown-content");
-                var i;
-                for (i = 0; i < dropdowns.length; i++) {
-                    var openDropdown = dropdowns[i];
-                    openDropdown.classList.add("hidden");
-                }
-            }
-        },
-        checkAll(event) {
-            let rows = event.currentTarget.parentElement.parentElement.parentElement.nextElementSibling.children;
-            for (var i = 0; i < rows.length; i++) {
-                if (event.currentTarget.checked) {
-                    rows[i].classList.add("bg-gray-100");
-                    let checkbox = rows[i].getElementsByTagName("input")[0];
-                    if (checkbox) {
-                        checkbox.checked = true;
-                    }
-                } else {
-                    rows[i].classList.remove("bg-gray-100");
-                    let checkbox = rows[i].getElementsByTagName("input")[0];
-                    if (checkbox) {
-                        checkbox.checked = false;
-                    }
-                }
-            }
-        },
-        tableInteract(event) {
-            var single = event.currentTarget.parentElement.parentElement;
-            single.classList.toggle("bg-gray-100");
-        },
-        pageView(val) {
-            let text = document.getElementById("page-view");
-            if (val) {
-                if (this.$data.temp === 2) {
-                    this.$data.temp = 0;
-                } else {
-                    this.$data.temp = this.$data.temp + 1;
-                }
-            } else if (this.$data.temp !== 0) {
-                this.$data.temp = this.$data.temp - 1;
-            }
-            switch (this.$data.temp) {
-                case 0:
-                    text.innerHTML = "Viewing 1 - 20 of 60";
-                    break;
-                case 1:
-                    text.innerHTML = "Viewing 21 - 40 of 60";
-                    break;
-                case 2:
-                    text.innerHTML = "Viewing 41 - 60 of 60";
-            }
-        },
-    },
-    created() {
-        document.addEventListener("click", this.documentClick);
-    },
-    unmounted() {
-        document.removeEventListener("click", this.documentClick);
-    },
-};
-</script>-->

@@ -11,7 +11,7 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
-    const requestConfig = error.config;
+    //const requestConfig = error.config;
     if (
       error.response &&
       error.response.status === 401
@@ -21,3 +21,7 @@ axios.interceptors.response.use(
     throw error;
   }
 );
+
+function getAccessToken(){
+  return localStorage.getItem("Token");
+}
