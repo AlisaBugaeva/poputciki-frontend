@@ -23,14 +23,27 @@ export const getNewTrips = async (okCallback, errorCallback) => {
   }
 };
 
-export const tripSearch = async (okCallback, errorCallback) => {
+export const tripSearch = async (startPoint, finishPoint, startDate,okCallback, errorCallback) => {
   try {
-    const response = await axios.get(`/trips/search?fromTime=2022-03-22&toTime=2022-03-25&fromPoint=Moskow&toPoint=Tula&limit=5&page=0`);
+    const response = await axios.get(`/trips/search?fromTime=${startDate}&fromPoint=${startPoint}&toPoint=${finishPoint}&limit=5&page=0`);
     okCallback(response.data);
   } catch (e) {
     return errorCallback(e);
   }
 };
+
+
+export const findPlaces = async (name, okCallback, errorCallback) => {
+  try {
+    const response = await axios.get(`/places?name=${name}`);
+    okCallback(response.data);
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
+
+
 
 export const doLogin = async (email,password, okCallback, errorCallback) => {
   try {
@@ -57,11 +70,4 @@ function setToken(token){
   localStorage.setItem("Token", token);
 };
 
-/*export const findPlace = async (okCallback, errorCallback) => {
-  try {
-    const response = await axios.get(`/places?name=${encodeURI(this.query)}`);
-    okCallback(response.data);
-  } catch (e) {
-    return errorCallback(e);
-  }
-};*/
+

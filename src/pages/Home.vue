@@ -136,13 +136,13 @@
                   :value="query"
                 />
               </div>
-            </div>
-
-            <div>
-              <div v-for="p in searchPlaces" :key="p.city">
-                <p>{{ p.city }}</p>
+              <div class="results">
+                <div class="result" v-for="p in searchPlacesStart" :key="p.city" @click="query = p.city">
+                  <p>{{ p.city }}</p>
+                </div>
               </div>
             </div>
+
             <!-- Code block ends -->
             <!-- Code block starts -->
             <div class="flex flex-col md:mr-16 md:py-0 py-1">
@@ -169,7 +169,14 @@
                   id="destination"
                   class="text-gray-600 dark:text-gray-400 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 bg-white font-normal w-64 h-10 flex items-center pl-12 text-sm border-gray-300 rounded border shadow"
                   placeholder="Going to..."
+                  @input="(e) => (query1 = e.target.value)"
+                  :value="query1"
                 />
+              </div>
+              <div class="results">
+                <div class="result" v-for="p in searchPlacesFinish" :key="p.city" @click="query1 = p.city">
+                  <p>{{ p.city }}</p>
+                </div>
               </div>
             </div>
             <!-- Code block ends -->
@@ -196,14 +203,16 @@
                 </div>
                 <input
                   class="text-gray-600 dark:text-gray-400 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 bg-white font-normal w-64 h-10 flex items-center pl-16 text-sm border-gray-300 rounded border shadow"
-                  placeholder="Today"
+                  placeholder="Starting date"
+                  @input="(e) => (query2 = e.target.value)"
                 />
               </div>
             </div>
             <div class="flex flex-col md:py-1 py-1">
               <div class="relative px-4">
                 <button
-                  class="focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-sm leading-none text-white py-3 px-5 bg-gray-500 rounded hover:bg-gray-200 focus:outline-none"
+                  class="focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-sm leading-none text-white py-3 px-5 bg-gray-500 rounded hover:bg-gray-400 focus:outline-none"
+                  @click="searchingTrips()"
                 >
                   Search
                 </button>
@@ -385,12 +394,34 @@
 
 <script>
 import router from "../router";
-import { getTop5Places, getNewTrips } from "../api/api";
+import { getTop5Places, getNewTrips, findPlaces, tripSearch } from "../api/api";
 
-require('vue-events')
+require("vue-events");
 
 export default {
   name: "Home2",
+
+  data() {
+
+    return {
+      travels: [],
+
+      places: [],
+      searchPlacesStart: [],
+      searchPlacesFinish: [],
+
+      query: "",
+      query1:"",
+      query2:"",
+      updateTimeout: null,
+
+      show: false,
+      show1: false,
+      drop: false,
+      drop1: false,
+      drop2: true,
+    };
+  },
 
   mounted() {
     console.log(`the component is now mounted.`),
@@ -411,24 +442,6 @@ export default {
         this.error = error.message;
       }
     );
-
-    /*findPlace(
-      (data) => {
-        this.searchPlaces = data;
-      },
-      (error) => {
-        this.error = error.message;
-      }
-    );*/
-
-    /*tripSearch(
-      (data) => {
-        this.travels = data;
-      },
-      (error) => {
-        this.error = error.message;
-      }
-    );*/
   },
 
   watch: {
@@ -439,83 +452,65 @@ export default {
       }
       this.updateTimeout = setTimeout(this.updateResults, 200);
     },
+
+     query1() {
+      if (this.updateTimeout) {
+        clearTimeout(this.updateTimeout);
+        this.updateTimeout = null;
+      }
+      this.updateTimeout = setTimeout(this.updateResults1, 200);
+    },
   },
 
-  data() {
-    /*const Holland = {
-      id: 1,
-      name: "Tom",
-      surnsme: "Holland",
-      departurePoint: "Moskow",
-      destinationPoint: "Kazan",
-      departureDate: "10.02.2022",
-      destinationDate: "22.02.2022",
-      status: "OPEN",
-    };
-    const Felton = {
-      id: 2,
-      name: "Tom",
-      surnsme: "Felton",
-      departurePoint: "Moskow",
-      destinationPoint: "Tula",
-      departureDate: "14.03.2022",
-      destinationDate: "17.03.2022",
-      status: "OPEN",
-    };
-
-    const Sochi = {
-      name: "Sochi",
-      photo:
-        "http://localhost:8081/img/Sochi.jpg",
-      info: "Sochi, a Russian city on the Black Sea, is known as a summer beach resort, and was host of the 2014 Winter Olympics. Its parks include the palm-filled Arboretum. It's also notable for 20th-century neoclassical buildings such as the columned Winter Theatre. Forested Sochi National Park is a 1,937-sq.-km protected area in the nearby Caucasus Mountains. Some 70 km inland, Krasnaya Polyana is a prominent ski resort.",
-    };
-    const Voronezh = {
-      name: "Voronezh",
-      photo:
-        "http://localhost:8081/img/Voronezh.jpg",
-      info: "Voronezh is a city on the Voronezh River in southwestern Russia. Landscaped Petrovsky Park is home to a bronze statue of Peter I. Housed in a baroque building, the Voronezh Regional Art Museum has collections of Ancient Egyptian art and several centuries of Russian paintings. The ship museum Goto Predestination recreates 18th-century naval life. Scarlet Sails park has pine trees, playgrounds and an outdoor theater.",
-    };
-    const NizhnyNovgorod = {
-      name: "Nizhny Novgorod",
-      photo:
-        "http://localhost:8081/img/Nizhny%20Novgorod.jpg",
-      info: "Nizhny Novgorod is a large city on the Volga River in western Russia. It’s known for its 16th-century Kremlin, ringed by 13 fortified towers, including the Dmitrovskaya Tower. Within the Kremlin’s walls is the green-spired Cathedral of the Archangel Michael, rebuilt in the 17th century. Nizhny Novgorod State Art Museum, housed in a grand building, exhibits Russian and European paintings and a collection of icons.",
-    };
-    const SaintPetersburg = {
-      name: "Saint Petersburg",
-      photo:
-        "http://localhost:8081/img/Saint%20Petersburg.jpg",
-      info: "St. Petersburg is a Russian port city on the Baltic Sea. It was the imperial capital for 2 centuries, having been founded in 1703 by Peter the Great, subject of the city's iconic “Bronze Horseman” statue. It remains Russia's cultural center, with venues such as the Mariinsky Theatre hosting opera and ballet, and the State Russian Museum showcasing Russian art, from Orthodox icon paintings to Kandinsky works.",
-    };*/
-
-    return {
-      travels: [],
-
-      places: [],
-      searchPlaces: [],
-
-      query: "",
-      updateTimeout: null,
-
-      show: false,
-      show1: false,
-      drop: false,
-      drop1: false,
-      drop2: true,
-    };
-  },
+  
 
   methods: {
+    
+    searchingTrips(){
+      tripSearch(this.query,this.query1,this.query2,
+      (data) => {
+        this.travels = data;
+      },
+      (error) => {
+        this.error = error.message;
+      }
+    );
+    },
+
     updateResults() {
       this.query = this.query.trim();
       if (this.query.length <= 0) {
-        this.searchPlaces = [];
+        this.searchPlacesStart = [];
         return;
       }
 
-      this.$api.get(`/places?name=${encodeURI(this.query)}`).then((res) => {
-        this.searchPlaces = res.data.data;
-      });
+      findPlaces(
+        encodeURI(this.query),
+        (res) => {
+          this.searchPlacesStart = res;
+        },
+        (error) => {
+          this.error = error.message;
+        }
+      );
+    },
+
+    updateResults1() {
+      this.query1 = this.query1.trim();
+      if (this.query1.length <= 0) {
+        this.searchPlacesFinish = [];
+        return;
+      }
+
+      findPlaces(
+        encodeURI(this.query1),
+        (res) => {
+          this.searchPlacesFinish = res;
+        },
+        (error) => {
+          this.error = error.message;
+        }
+      );
     },
 
     signIn() {
@@ -543,37 +538,35 @@ export default {
 </script>
 
 <style scoped>
-
-  .results {
-    background-color: white;
-    max-height: 300px;
-    overflow-y: scroll;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    .result {
-      position: relative;
-      background-color: white;
-      height: 32px;
-      cursor: pointer;
-      transition: all .2s;
-      color: rgb(50, 50, 50);
-
-      &:hover {
-        background-color: rgb(240, 240, 240);
-      }
-
-      p {
-        width: 100%;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        padding-left: 15px;
-      }
-    }
+.results {
+  background-color: white;
+  max-height: 300px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
   }
 
+  .result {
+    position: relative;
+    background-color: white;
+    height: 32px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: rgb(50, 50, 50);
+
+    &:hover {
+      background-color: rgb(240, 240, 240);
+    }
+
+    p {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding-left: 15px;
+    }
+  }
+}
 </style>
