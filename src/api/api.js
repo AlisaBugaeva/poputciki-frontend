@@ -23,6 +23,17 @@ export const getNewTrips = async (okCallback, errorCallback) => {
   }
 };
 
+export const getUserTrips = async (okCallback, errorCallback) => {
+  try {
+    const response = await axios.get(`/trips/my`);
+    okCallback(response.data);
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
+
+
 export const tripSearch = async (startPoint, finishPoint, startDate,okCallback, errorCallback) => {
   try {
     const response = await axios.get(`/trips/search?fromTime=${startDate}&fromPoint=${startPoint}&toPoint=${finishPoint}&limit=5&page=0`);
@@ -55,11 +66,20 @@ export const doLogin = async (email,password, okCallback, errorCallback) => {
   }
 };
 
-export const Register = async (name,surname,phoneNumber,email,password, okCallback, errorCallback) => {
+export const register = async (name,surname,phoneNumber,email,password, okCallback, errorCallback) => {
   try {
     const response = await axios.post(`/auth/registration`,{name,surname,phoneNumber,email,password});
     okCallback();
     setToken(response.data.token);
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
+export const getUser = async (okCallback, errorCallback) => {
+  try {
+    const response = await axios.get(`/user/info`);
+    okCallback(response.data);
   } catch (e) {
     return errorCallback(e);
   }

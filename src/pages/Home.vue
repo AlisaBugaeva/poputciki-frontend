@@ -24,11 +24,6 @@
             >
               Make a trip
             </li>
-            <li
-              class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mr-10 tracking-normal"
-            >
-              Join the trip
-            </li>
           </ul>
         </div>
         <div class="h-full xl:flex hidden items-center justify-end">
@@ -37,7 +32,16 @@
               class="w-32 pr-16 h-full flex items-center justify-end border-r"
             ></div>
             <div class="w-full h-full flex">
+              <button
+                v-if="user.name == ''"
+                @click="signIn()"
+                class="focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none"
+              >
+                Login
+              </button>
+
               <div
+                v-else
                 aria-haspopup="true"
                 class="cursor-pointer w-full flex items-center justify-end relative"
                 @click="dropdownHandler($event)"
@@ -49,22 +53,59 @@
                     class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none"
                   >
                     <div class="flex items-center">
-                      <span class="ml-2" @click="signIn()"> Sign in </span>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        class="icon icon-tabler icon-tabler-user"
+                        width="20"
+                        height="20"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.5"
+                        stroke="currentColor"
+                        fill="none"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      >
+                        <path stroke="none" d="M0 0h24v24H0z" />
+                        <circle cx="12" cy="7" r="4" />
+                        <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+                      </svg>
+                      <span class="ml-2"> Sign out </span>
                     </div>
                   </li>
                   <li
                     class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center"
                   >
-                    <span class="ml-2" @click="signUp()"> Sign up </span>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      class="icon icon-tabler icon-tabler-help"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      fill="none"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <path stroke="none" d="M0 0h24v24H0z" />
+                      <circle cx="12" cy="12" r="9" />
+                      <line x1="12" y1="17" x2="12" y2="17.01" />
+                      <path
+                        d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4"
+                      />
+                    </svg>
+                    <span class="ml-2"> Help Center </span>
                   </li>
                 </ul>
                 <img
-                  @click="userPage()"
                   class="rounded-full h-10 w-10 object-cover"
                   src="https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png"
                   alt="avatar"
+                  @click="userPage()"
                 />
-                <p class="text-gray-800 text-sm ml-2">Login</p>
+                <p class="text-gray-800 text-sm ml-2">
+                  {{user.name}} {{user.surname}}
+                </p>
                 <div class="cursor-pointer text-gray-600">
                   <svg
                     aria-haspopup="true"
@@ -137,7 +178,12 @@
                 />
               </div>
               <div class="results">
-                <div class="result" v-for="p in searchPlacesStart" :key="p.city" @click="query = p.city">
+                <div
+                  class="result"
+                  v-for="p in searchPlacesStart"
+                  :key="p.city"
+                  @click="query = p.city"
+                >
                   <p>{{ p.city }}</p>
                 </div>
               </div>
@@ -174,7 +220,12 @@
                 />
               </div>
               <div class="results">
-                <div class="result" v-for="p in searchPlacesFinish" :key="p.city" @click="query1 = p.city">
+                <div
+                  class="result"
+                  v-for="p in searchPlacesFinish"
+                  :key="p.city"
+                  @click="query1 = p.city"
+                >
                   <p>{{ p.city }}</p>
                 </div>
               </div>
@@ -203,6 +254,7 @@
                 </div>
                 <input
                   class="text-gray-600 dark:text-gray-400 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 bg-white font-normal w-64 h-10 flex items-center pl-16 text-sm border-gray-300 rounded border shadow"
+                  type="date"
                   placeholder="Starting date"
                   @input="(e) => (query2 = e.target.value)"
                 />
@@ -290,67 +342,6 @@
             </tbody>
           </table>
         </div>
-        <div
-          class="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full"
-        >
-          <div
-            class="w-full lg:w-2/3 flex flex-col lg:flex-row items-start lg:items-center justify-end"
-          >
-            <div
-              class="flex items-center lg:border-l lg:border-r border-gray-300 py-3 lg:py-0 lg:px-6"
-            >
-              <p
-                class="text-base text-gray-600 dark:text-gray-400"
-                id="page-view"
-              >
-                Viewing 1 - 2 of 6
-              </p>
-              <a
-                class="text-gray-600 dark:text-gray-400 ml-2 border-transparent border cursor-pointer rounded"
-                onclick="pageView(false)"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-chevron-left"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <polyline points="15 6 9 12 15 18" />
-                </svg>
-              </a>
-              <a
-                class="text-gray-600 dark:text-gray-400 border-transparent border rounded focus:outline-none cursor-pointer"
-                onclick="pageView(true)"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="icon icon-tabler icon-tabler-chevron-right"
-                  width="20"
-                  height="20"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path stroke="none" d="M0 0h24v24H0z" />
-                  <polyline points="9 6 15 12 9 18" />
-                </svg>
-              </a>
-            </div>
-            <div
-              class="flex items-center lg:border-r border-gray-300 pb-3 lg:pb-0 lg:px-6"
-            ></div>
-          </div>
-        </div>
       </div>
     </div>
     <!-- Page title ends -->
@@ -394,7 +385,13 @@
 
 <script>
 import router from "../router";
-import { getTop5Places, getNewTrips, findPlaces, tripSearch } from "../api/api";
+import {
+  getTop5Places,
+  getNewTrips,
+  findPlaces,
+  tripSearch,
+  getUser,
+} from "../api/api";
 
 require("vue-events");
 
@@ -402,8 +399,16 @@ export default {
   name: "Home2",
 
   data() {
-
     return {
+      user: {
+        id: 0,
+        name: "",
+        surnsme: "",
+        phoneNumber: "",
+        email: "",
+        password: "",
+      },
+
       travels: [],
 
       places: [],
@@ -411,8 +416,8 @@ export default {
       searchPlacesFinish: [],
 
       query: "",
-      query1:"",
-      query2:"",
+      query1: "",
+      query2: "",
       updateTimeout: null,
 
       show: false,
@@ -442,6 +447,15 @@ export default {
         this.error = error.message;
       }
     );
+
+    getUser(
+      (data) => {
+        this.user = data;
+      },
+      () => {
+        this.user = "";
+      }
+    );
   },
 
   watch: {
@@ -453,7 +467,7 @@ export default {
       this.updateTimeout = setTimeout(this.updateResults, 200);
     },
 
-     query1() {
+    query1() {
       if (this.updateTimeout) {
         clearTimeout(this.updateTimeout);
         this.updateTimeout = null;
@@ -462,19 +476,19 @@ export default {
     },
   },
 
-  
-
   methods: {
-    
-    searchingTrips(){
-      tripSearch(this.query,this.query1,this.query2,
-      (data) => {
-        this.travels = data;
-      },
-      (error) => {
-        this.error = error.message;
-      }
-    );
+    searchingTrips() {
+      tripSearch(
+        this.query,
+        this.query1,
+        this.query2,
+        (data) => {
+          this.travels = data;
+        },
+        (error) => {
+          this.error = error.message;
+        }
+      );
     },
 
     updateResults() {

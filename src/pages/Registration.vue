@@ -107,6 +107,9 @@
               </div>
             </div>
           </div>
+          <div class="mt-8 text-red-600">
+            {{ error }}
+          </div>
           <div class="mt-8">
             <button
               role="button"
@@ -137,6 +140,7 @@
 
 <script>
 import router from "../router"
+import { register } from "../api/api";
 
 export default {
   name: "Registration",
@@ -148,12 +152,20 @@ export default {
       phoneNumber:"",
       email:"",
       password:"",
+      error:"",
     };
   },
 
   methods: {
     signUp(){
-      router.push({name: "Home"})
+        register(this.name,this.surname,this.phoneNumber,this.email,this.password,
+        () => {
+          router.push({name: "Home"})
+        },
+        (e) => {
+          this.error = e.response.data.errorMessage;
+        }
+      );
     },
 
     signIn(){

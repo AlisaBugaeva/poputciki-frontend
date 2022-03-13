@@ -22,6 +22,7 @@
         <ul class="pr-32 xl:flex hidden items-center h-full">
           <li
             class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 tracking-normal"
+            @click="goHome()"
           >
             Home page
           </li>
@@ -29,11 +30,6 @@
             class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mx-10 tracking-normal relative"
           >
             Make a trip
-          </li>
-          <li
-            class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mr-10 tracking-normal"
-          >
-            Join the trip
           </li>
         </ul>
       </div>
@@ -43,35 +39,6 @@
             class="w-32 pr-16 h-full flex items-center justify-end border-r"
           ></div>
           <div class="w-full h-full flex">
-            <div
-              class="w-16 xl:w-32 h-full flex items-center justify-center xl:border-r"
-            >
-              <div class="relative">
-                <div class="w-6 h-6 xl:w-auto xl:h-auto text-gray-600">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="icon icon-tabler icon-tabler-bell"
-                    width="28"
-                    height="28"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z"></path>
-                    <path
-                      d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"
-                    ></path>
-                    <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
-                  </svg>
-                </div>
-                <div
-                  class="w-2 h-2 rounded-full bg-red-400 border border-white absolute inset-0 mt-1 mr-1 m-auto"
-                ></div>
-              </div>
-            </div>
             <div
               aria-haspopup="true"
               class="cursor-pointer w-full flex items-center justify-end relative"
@@ -133,7 +100,7 @@
                 src="https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png"
                 alt="avatar"
               />
-              <p class="text-gray-800 text-sm ml-2">Alice Bugaeva</p>
+              <p class="text-gray-800 text-sm ml-2">{{user.name}} {{user.surname}}</p>
               <div class="cursor-pointer text-gray-600">
                 <svg
                   aria-haspopup="true"
@@ -249,7 +216,7 @@
               tabindex="0"
               aria-label="Enter first name"
               class="w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"
-              :value="`${name}`"
+              :value="`${user.name}`"
             />
           </div>
           <div class="flex flex-col md:ml-12 md:mt-0 mt-8">
@@ -261,7 +228,7 @@
               tabindex="0"
               aria-label="Enter last name"
               class="w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"
-              :value="`${surname}`"
+              :value="`${user.surname}`"
             />
           </div>
         </div>
@@ -275,7 +242,7 @@
               tabindex="0"
               aria-label="Enter email Address"
               class="w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"
-              :value="`${email}`"
+              :value="`${user.email}`"
             />
           </div>
           <div class="flex flex-col md:ml-12 md:mt-0 mt-8">
@@ -286,7 +253,7 @@
               tabindex="0"
               aria-label="Enter phone number"
               class="w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"
-              :value="`${phoneNumber}`"
+              :value="`${user.phoneNumber}`"
             />
           </div>
         </div>
@@ -330,39 +297,29 @@
               >
                 <b>Destination date</b>
               </th>
-              <th
-                class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
-              >
-                <b>Status</b>
-              </th>
             </tr>
           </thead>
-          <tbody v-for="t in myTravels" :key="t.id">
+          <tbody v-for="t in myTravels" :key="t.start">
             <tr class="h-24 border-gray-300 border-b">
               <td
                 class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
               >
-                {{ t.departurePoint }}
+                {{ t.start }}
               </td>
               <td
                 class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
               >
-                {{ t.destinationPoint }}
+                {{ t.finish }}
               </td>
               <td
                 class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
               >
-                {{ t.departureDate }}
+                {{ t.startDate }}
               </td>
               <td
                 class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
               >
-                {{ t.destinationDate }}
-              </td>
-              <td
-                class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
-              >
-                {{ t.status }}
+                {{ t.finishDate }}
               </td>
               <td
                 class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
@@ -378,67 +335,6 @@
             </tr>
           </tbody>
         </table>
-      </div>
-      <div
-        class="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full"
-      >
-        <div
-          class="w-full lg:w-2/3 flex flex-col lg:flex-row items-start lg:items-center justify-end"
-        >
-          <div
-            class="flex items-center lg:border-l lg:border-r border-gray-300 py-3 lg:py-0 lg:px-6"
-          >
-            <p
-              class="text-base text-gray-600 dark:text-gray-400"
-              id="page-view"
-            >
-              Viewing 1 - 2 of 6
-            </p>
-            <a
-              class="text-gray-600 dark:text-gray-400 ml-2 border-transparent border cursor-pointer rounded"
-              onclick="pageView(false)"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-chevron-left"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <polyline points="15 6 9 12 15 18" />
-              </svg>
-            </a>
-            <a
-              class="text-gray-600 dark:text-gray-400 border-transparent border rounded focus:outline-none cursor-pointer"
-              onclick="pageView(true)"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-chevron-right"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <polyline points="9 6 15 12 9 18" />
-              </svg>
-            </a>
-          </div>
-          <div
-            class="flex items-center lg:border-r border-gray-300 pb-3 lg:pb-0 lg:px-6"
-          ></div>
-        </div>
       </div>
     </div>
   </section>
@@ -527,93 +423,17 @@
           </tbody>
         </table>
       </div>
-      <div
-        class="flex flex-col lg:flex-row p-4 lg:p-8 justify-between items-start lg:items-stretch w-full"
-      >
-        <div
-          class="w-full lg:w-2/3 flex flex-col lg:flex-row items-start lg:items-center justify-end"
-        >
-          <div
-            class="flex items-center lg:border-l lg:border-r border-gray-300 py-3 lg:py-0 lg:px-6"
-          >
-            <p
-              class="text-base text-gray-600 dark:text-gray-400"
-              id="page-view"
-            >
-              Viewing 1 - 2 of 6
-            </p>
-            <a
-              class="text-gray-600 dark:text-gray-400 ml-2 border-transparent border cursor-pointer rounded"
-              onclick="pageView(false)"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-chevron-left"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <polyline points="15 6 9 12 15 18" />
-              </svg>
-            </a>
-            <a
-              class="text-gray-600 dark:text-gray-400 border-transparent border rounded focus:outline-none cursor-pointer"
-              onclick="pageView(true)"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="icon icon-tabler icon-tabler-chevron-right"
-                width="20"
-                height="20"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path stroke="none" d="M0 0h24v24H0z" />
-                <polyline points="9 6 15 12 9 18" />
-              </svg>
-            </a>
-          </div>
-          <div
-            class="flex items-center lg:border-r border-gray-300 pb-3 lg:pb-0 lg:px-6"
-          ></div>
-        </div>
-      </div>
     </div>
   </section>
 </template>
 
 <script>
 import router from "../router"
+import { getUser, getUserTrips} from "../api/api";
 
 export default {
   name: "LightWithTabs",
   data() {
-    const trip1 = {
-      id: 1,
-      departurePoint: "Moskow",
-      destinationPoint: "Kazan",
-      departureDate: "10.02.2022",
-      destinationDate: "22.02.2022",
-      status: "OPEN",
-    };
-    const trip2 = {
-      id: 2,
-      departurePoint: "Moskow",
-      destinationPoint: "Tula",
-      departureDate: "14.03.2022",
-      destinationDate: "17.03.2022",
-      status: "OPEN",
-    };
 
     const Holland = {
       id: 1,
@@ -640,17 +460,47 @@ export default {
       sel: "myProfile",
       profilePhoto:
         "https://tuk-cdn.s3.amazonaws.com/assets/components/boxed_layout/bl_1.png",
-      myTravels: [trip1, trip2],
+      myTravels: [],
       travels: [Holland, Felton],
-      name: "Alice",
-      surname: "Bugaeva",
-      phoneNumber: "89203560027",
-      email: "alisavugaeva@mail.ru",
+
+      user: {
+        id: 0,
+        name: "",
+        surnsme: "",
+        phoneNumber: "",
+        email: "",
+        password: "",
+      },
     };
   },
+
+mounted() {
+    getUser(
+      (data) => {
+        this.user = data;
+      },
+      () => {
+        this.signIn();
+      }
+    );
+
+    getUserTrips(
+      (data) => {
+        this.myTravels = data;
+      },
+      (error) => {
+        this.error = error.message;
+      }
+    );
+  },
+
   methods: {
     goHome(){
       router.push({name: "Home"})
+    },
+
+    signIn() {
+      router.push({ name: "Login" });
     },
 
     dropdownHandler(event) {

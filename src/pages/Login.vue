@@ -120,11 +120,10 @@ export default {
     login(){
       doLogin(this.email,this.password,
         () => {
-          //this.places = data;
           router.push({name: "Home"})
         },
-        (error) => {
-          this.error = error.message;
+        (e) => {
+          this.error = e.response.data.errorMessage;
         }
       );
       
