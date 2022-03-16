@@ -18,27 +18,224 @@
               Poputciki
             </h3>
           </div>
-          <ul class="pr-32 xl:flex hidden items-center h-full">
-            <li
+
+          <div
+            class="py-12 bg-gray-700 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
+            id="modal"
+            v-if="modalWindow"
+          >
+            <div
+              role="alert"
+              class="container mx-auto w-11/12 md:w-2/3 max-w-lg"
+            >
+              <div
+                class="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400"
+              >
+                <div class="w-full flex justify-start text-gray-600 mb-3">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-12 w-12"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+                    />
+                  </svg>
+                </div>
+                <h1
+                  class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4"
+                >
+                  Make a trip
+                </h1>
+                <label
+                  for="name"
+                  class="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                  >Start point</label
+                >
+                <input
+                  class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                  @input="(e) => (makeTripStartPoint = e.target.value)"
+                  :value="makeTripStartPoint"
+                />
+                <div class="results">
+                  <div
+                    class="result"
+                    v-for="p in makeNewTripStartPoints"
+                    :key="p.city"
+                    @click="makeTripStartPoint = p.city"
+                  >
+                    <p>{{ p.city }}</p>
+                  </div>
+                </div>
+                <label
+                  for="name"
+                  class="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                  >Finish point</label
+                >
+                <input
+                  class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                  @input="(e) => (makeTripFinishPoint = e.target.value)"
+                  :value="makeTripFinishPoint"
+                />
+                <div class="results">
+                  <div
+                    class="result"
+                    v-for="p in makeNewTripFinishPoints"
+                    :key="p.city"
+                    @click="makeTripFinishPoint = p.city"
+                  >
+                    <p>{{ p.city }}</p>
+                  </div>
+                </div>
+
+                <label
+                  for="expiry"
+                  class="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                  >Start Date</label
+                >
+                <div class="relative mb-5 mt-2">
+                  <input
+                    class="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                    type="date"
+                    @input="(e) => (makeTripStartDate = e.target.value)"
+                  />
+                </div>
+
+                <label
+                  for="expiry"
+                  class="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                  >Finish Date</label
+                >
+                <div class="relative mb-5 mt-2">
+                  <input
+                    class="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                    type="date"
+                    @input="(e) => (makeTripFinishDate = e.target.value)"
+                  />
+                </div>
+                <p>{{ errorTrip }}</p>
+
+                <div class="flex items-center justify-start w-full">
+                  <button
+                    class="focus:outline-none transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
+                    @click="makingTrip()"
+                  >
+                    Submit
+                  </button>
+                  <button
+                    class="focus:outline-none ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
+                    @click="fadeOut()"
+                  >
+                    Cancel
+                  </button>
+                </div>
+                <div
+                  class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+                  @click="fadeOut()"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-label="Close"
+                    class="icon icon-tabler icon-tabler-x"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    stroke-width="2.5"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="py-12 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
+            id="modal"
+            v-if="successfully"
+          >
+            <div
+              role="alert"
+              class="container mx-auto w-11/12 md:w-2/3 max-w-lg"
+            >
+              <div
+                class="relative py-8 px-5 md:px-10 bg-green-200 shadow-md rounded border border-gray-400"
+              >
+                <h1 class="text-gray-800 font-bold tracking-normal mb-4">
+                  Successfully!
+                </h1>
+                <h3
+                  class="text-gray-800 font-lg tracking-normal leading-tight mb-4"
+                >
+                  You have made a new trip
+                </h3>
+
+                <div class="flex items-center justify-start w-full">
+                  <button
+                    class="focus:outline-none transition duration-150 ease-in-out hover:bg-green-500 bg-green-600 rounded text-white px-8 py-2 text-sm"
+                    @click="successfully = false, userPage()"
+                  >
+                    Go to your trips
+                  </button>
+                </div>
+                <div
+                  class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+                  @click="fadeOut()"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-label="Close"
+                    class="icon icon-tabler icon-tabler-x"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    stroke-width="2.5"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full flex justify-center py-12" id="button">
+            <div
               class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mx-10 tracking-normal relative"
+              @click="(modalWindow = true), fadeIn()"
             >
               Make a trip
-            </li>
-          </ul>
+            </div>
+          </div>
         </div>
         <div class="h-full xl:flex hidden items-center justify-end">
           <div class="h-full flex items-center">
-            <div
-              class="w-32 pr-16 h-full flex items-center justify-end border-r"
-            ></div>
+            <div class="w-32 pr-16 h-full flex items-center justify-end"></div>
             <div class="w-full h-full flex">
-              <button
-                v-if="user.name == ''"
-                @click="signIn()"
-                class="focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none"
-              >
-                Login
-              </button>
+              <div v-if="!user" class="justify-center py-4 px-4" id="button">
+                <button
+                  @click="signIn()"
+                  class="focus:outline-none mx-auto transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-4 sm:px-8 py-2 text-xs sm:text-sm"
+                >
+                  Login
+                </button>
+              </div>
 
               <div
                 v-else
@@ -69,7 +266,7 @@
                         <circle cx="12" cy="7" r="4" />
                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                       </svg>
-                      <span class="ml-2"> Sign out </span>
+                      <span @click="doLogout()" class="ml-2"> Sign out </span>
                     </div>
                   </li>
                   <li
@@ -104,7 +301,7 @@
                   @click="userPage()"
                 />
                 <p class="text-gray-800 text-sm ml-2">
-                  {{user.name}} {{user.surname}}
+                  {{ user.name }} {{ user.surname }}
                 </p>
                 <div class="cursor-pointer text-gray-600">
                   <svg
@@ -353,27 +550,88 @@
         <h3
           class="lg:text-2xl text-2xl font-semibold leading-9 text-black dark:text-gray-50"
         >
-          Top of places
+          Top 5 places
         </h3>
-        <div class="md:flex justify-between mt-12">
-          <div
-            v-for="p in places"
-            :key="p.name"
-            class="md:w-1/2 md:ml-6 lg:w-full"
-          >
-            <div>
+        <div class="md:flex items-start justify-between mt-12">
+          <div class="md:w-1/2 lg:w-full">
+            <div v-if="places[0]">
               <div class="relative">
-                <img :src="`${p.photo}`" :alt="`${p.name}`" />
+                <img :src="`${places[0].photo}`" :alt="`${places[0].city}`" />
               </div>
               <h1
-                class="text-2xl font-semibold leading-7 sm:pr-20 mt-2 text-gray-800 dark:text-gray-50"
+                class="text-2xl font-semibold leading-7 sm:pr-20 mt-2 text-gray-800"
               >
-                {{ p.city }}
+                {{ places[0].city }}
               </h1>
               <p
-                class="text-base leading-normal mt-4 sm:pr-20 md:pr-10 text-gray-500 dark:text-white"
+                class="text-base leading-normal mt-4 sm:pr-20 md:pr-10 text-gray-600"
               >
-                {{ p.description }}
+                {{ places[0].description }}
+              </p>
+            </div>
+
+            <div class="mt-9" v-if="places[1]">
+              <div class="relative">
+                <img :src="`${places[1].photo}`" :alt="`${places[1].city}`" />
+              </div>
+              <h1
+                class="text-2xl font-semibold leading-7 sm:pr-20 mt-2 text-gray-800"
+              >
+                {{ places[1].city }}
+              </h1>
+              <p
+                class="text-base leading-normal mt-4 sm:pr-20 md:pr-10 text-gray-600"
+              >
+                {{ places[1].description }}
+              </p>
+            </div>
+
+            <div class="mt-9" v-if="places[4]">
+              <div class="relative">
+                <img :src="`${places[4].photo}`" :alt="`${places[4].city}`" />
+              </div>
+              <h1
+                class="text-2xl font-semibold leading-7 sm:pr-20 mt-2 text-gray-800"
+              >
+                {{ places[4].city }}
+              </h1>
+              <p
+                class="text-base leading-normal mt-4 sm:pr-20 md:pr-10 text-gray-600"
+              >
+                {{ places[4].description }}
+              </p>
+            </div>
+          </div>
+
+          <div class="md:w-1/2 md:ml-6 md:mt-0 mt-9 lg:w-full">
+            <div v-if="places[2]">
+              <div class="relative">
+                <img :src="`${places[2].photo}`" :alt="`${places[2].city}`" />
+              </div>
+              <h1
+                class="text-2xl font-semibold leading-7 sm:pr-20 mt-2 text-gray-800"
+              >
+                {{ places[2].city }}
+              </h1>
+              <p
+                class="text-base leading-normal mt-4 sm:pr-20 md:pr-10 text-gray-600"
+              >
+                {{ places[2].description }}
+              </p>
+            </div>
+            <div class="mt-9" v-if="places[3]">
+              <div class="relative">
+                <img :src="`${places[3].photo}`" :alt="`${places[3].city}`" />
+              </div>
+              <h1
+                class="text-2xl font-semibold leading-7 sm:pr-20 mt-2 text-gray-800"
+              >
+                {{ places[3].city }}
+              </h1>
+              <p
+                class="text-base leading-normal mt-4 sm:pr-20 md:pr-10 text-gray-600"
+              >
+                {{ places[3].description }}
               </p>
             </div>
           </div>
@@ -391,6 +649,8 @@ import {
   findPlaces,
   tripSearch,
   getUser,
+  makeNewTrip,
+  logout,
 } from "../api/api";
 
 require("vue-events");
@@ -415,16 +675,28 @@ export default {
       searchPlacesStart: [],
       searchPlacesFinish: [],
 
+      makeNewTripStartPoints: [],
+      makeNewTripFinishPoints: [],
+
       query: "",
       query1: "",
       query2: "",
       updateTimeout: null,
+
+      makeTripStartPoint: "",
+      makeTripFinishPoint: "",
+      makeTripStartDate: "",
+      makeTripFinishDate: "",
+      errorTrip: "",
 
       show: false,
       show1: false,
       drop: false,
       drop1: false,
       drop2: true,
+      modalWindow: false,
+      successfully: false,
+
     };
   },
 
@@ -474,6 +746,22 @@ export default {
       }
       this.updateTimeout = setTimeout(this.updateResults1, 200);
     },
+
+    makeTripStartPoint() {
+      if (this.updateTimeout) {
+        clearTimeout(this.updateTimeout);
+        this.updateTimeout = null;
+      }
+      this.updateTimeout = setTimeout(this.updateResults2, 200);
+    },
+
+    makeTripFinishPoint() {
+      if (this.updateTimeout) {
+        clearTimeout(this.updateTimeout);
+        this.updateTimeout = null;
+      }
+      this.updateTimeout = setTimeout(this.updateResults3, 200);
+    },
   },
 
   methods: {
@@ -484,6 +772,34 @@ export default {
         this.query2,
         (data) => {
           this.travels = data;
+        },
+        (error) => {
+          this.error = error.message;
+        }
+      );
+    },
+
+    makingTrip() {
+      makeNewTrip(
+        this.makeTripStartPoint,
+        this.makeTripFinishPoint,
+        this.makeTripStartDate,
+        this.makeTripFinishDate,
+        () => {
+          this.fadeOut();
+          this.successfully = true;
+        },
+        (error) => {
+          this.errorTrip = error.response.data.errorMessage;
+        }
+      );
+    },
+
+    doLogout() {
+      logout(
+        () => {
+          this.user = "";
+          localStorage.removeItem("Token");
         },
         (error) => {
           this.error = error.message;
@@ -527,6 +843,42 @@ export default {
       );
     },
 
+    updateResults2() {
+      this.makeTripStartPoint = this.makeTripStartPoint.trim();
+      if (this.makeTripStartPoint.length <= 0) {
+        this.makeNewTripStartPoints = [];
+        return;
+      }
+
+      findPlaces(
+        encodeURI(this.makeTripStartPoint),
+        (res) => {
+          this.makeNewTripStartPoints = res;
+        },
+        (error) => {
+          this.error = error.message;
+        }
+      );
+    },
+
+    updateResults3() {
+      this.makeTripFinishPoint = this.makeTripFinishPoint.trim();
+      if (this.makeTripFinishPoint.length <= 0) {
+        this.makeNewTripFinishPoints = [];
+        return;
+      }
+
+      findPlaces(
+        encodeURI(this.makeTripFinishPoint),
+        (res) => {
+          this.makeNewTripFinishPoints = res;
+        },
+        (error) => {
+          this.error = error.message;
+        }
+      );
+    },
+
     signIn() {
       router.push({ name: "Login" });
     },
@@ -546,6 +898,34 @@ export default {
     sidebarHandler() {
       var sideBar = document.getElementById("mobile-nav");
       sideBar.classList.toggle("hidden");
+    },
+
+    fadeOut() {
+      let el = document.getElementById("modal");
+      el.style.opacity = 1;
+      (function fade() {
+        if ((el.style.opacity -= 0.1) < 0) {
+          el.style.display = "none";
+        } else {
+          requestAnimationFrame(fade);
+        }
+      })();
+    },
+    fadeIn(display) {
+      if (this.user) {
+        let el = document.getElementById("modal");
+        el.style.opacity = 0;
+        el.style.display = display || "flex";
+        (function fade() {
+          let val = parseFloat(el.style.opacity);
+          if (!((val += 0.2) > 1)) {
+            el.style.opacity = val;
+            requestAnimationFrame(fade);
+          }
+        })();
+      } else {
+        this.signIn();
+      }
     },
   },
 };

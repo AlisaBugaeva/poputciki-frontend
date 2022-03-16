@@ -19,6 +19,198 @@
             Poputciki
           </h3>
         </div>
+
+        <div
+          class="py-12 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
+          id="modal"
+          v-if="modalWindow"
+        >
+          <div role="alert" class="container mx-auto w-11/12 md:w-2/3 max-w-lg">
+            <div
+              class="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400"
+            >
+              <div class="w-full flex justify-start text-gray-600 mb-3">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-12 w-12"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  stroke-width="2"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"
+                  />
+                </svg>
+              </div>
+              <h1
+                class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4"
+              >
+                Make a trip
+              </h1>
+              <label
+                for="name"
+                class="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                >Start point</label
+              >
+              <input
+                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                @input="(e) => (makeTripStartPoint = e.target.value)"
+                :value="makeTripStartPoint"
+              />
+              <div class="results">
+                <div
+                  class="result"
+                  v-for="p in makeNewTripStartPoints"
+                  :key="p.city"
+                  @click="makeTripStartPoint = p.city"
+                >
+                  <p>{{ p.city }}</p>
+                </div>
+              </div>
+              <label
+                for="name"
+                class="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                >Finish point</label
+              >
+              <input
+                class="mb-5 mt-2 text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                @input="(e) => (makeTripFinishPoint = e.target.value)"
+                :value="makeTripFinishPoint"
+              />
+              <div class="results">
+                <div
+                  class="result"
+                  v-for="p in makeNewTripFinishPoints"
+                  :key="p.city"
+                  @click="makeTripFinishPoint = p.city"
+                >
+                  <p>{{ p.city }}</p>
+                </div>
+              </div>
+
+              <label
+                for="expiry"
+                class="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                >Start Date</label
+              >
+              <div class="relative mb-5 mt-2">
+                <input
+                  class="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                  type="date"
+                  @input="(e) => (makeTripStartDate = e.target.value)"
+                />
+              </div>
+
+              <label
+                for="expiry"
+                class="text-gray-800 text-sm font-bold leading-tight tracking-normal"
+                >Finish Date</label
+              >
+              <div class="relative mb-5 mt-2">
+                <input
+                  class="text-gray-600 focus:outline-none focus:border focus:border-indigo-700 font-normal w-full h-10 flex items-center pl-3 text-sm border-gray-300 rounded border"
+                  type="date"
+                  @input="(e) => (makeTripFinishDate = e.target.value)"
+                />
+              </div>
+              <p>{{ errorTrip }}</p>
+
+              <div class="flex items-center justify-start w-full">
+                <button
+                  class="focus:outline-none transition duration-150 ease-in-out hover:bg-indigo-600 bg-indigo-700 rounded text-white px-8 py-2 text-sm"
+                  @click="makingTrip()"
+                >
+                  Submit
+                </button>
+                <button
+                  class="focus:outline-none ml-3 bg-gray-100 transition duration-150 text-gray-600 ease-in-out hover:border-gray-400 hover:bg-gray-300 border rounded px-8 py-2 text-sm"
+                  @click="fadeOut()"
+                >
+                  Cancel
+                </button>
+              </div>
+              <div
+                class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+                @click="fadeOut()"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-label="Close"
+                  class="icon icon-tabler icon-tabler-x"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  stroke-width="2.5"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="py-12 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
+          id="modal"
+          v-if="successfully"
+        >
+          <div role="alert" class="container mx-auto w-11/12 md:w-2/3 max-w-lg">
+            <div
+              class="relative py-8 px-5 md:px-10 bg-green-200 shadow-md rounded border border-gray-400"
+            >
+              <h1 class="text-gray-800 font-bold tracking-normal mb-4">
+                Successfully!
+              </h1>
+              <h3
+                class="text-gray-800 font-lg tracking-normal leading-tight mb-4"
+              >
+                You have made a new trip
+              </h3>
+
+              <div class="flex items-center justify-start w-full">
+                
+                <button
+                  class="focus:outline-none transition duration-150 ease-in-out hover:bg-green-500 bg-green-600 rounded text-white px-8 py-2 text-sm"
+                  @click="sel = 'myTrips',successfully = false, getUserTrips"
+                >
+                  Go to your trips
+                </button>
+              </div>
+              <div
+                class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+                @click="fadeOut()"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-label="Close"
+                  class="icon icon-tabler icon-tabler-x"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  stroke-width="2.5"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <ul class="pr-32 xl:flex hidden items-center h-full">
           <li
             class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 tracking-normal"
@@ -28,6 +220,7 @@
           </li>
           <li
             class="hover:text-indigo-700 cursor-pointer h-full flex items-center text-sm text-gry-800 mx-10 tracking-normal relative"
+            @click="(modalWindow = true), fadeIn()"
           >
             Make a trip
           </li>
@@ -67,7 +260,7 @@
                       <circle cx="12" cy="7" r="4" />
                       <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
                     </svg>
-                    <span class="ml-2"> Sign out </span>
+                    <span class="ml-2" @click="doLogout()"> Sign out </span>
                   </div>
                 </li>
                 <li
@@ -100,7 +293,9 @@
                 src="https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png"
                 alt="avatar"
               />
-              <p class="text-gray-800 text-sm ml-2">{{user.name}} {{user.surname}}</p>
+              <p class="text-gray-800 text-sm ml-2">
+                {{ user.name }} {{ user.surname }}
+              </p>
               <div class="cursor-pointer text-gray-600">
                 <svg
                   aria-haspopup="true"
@@ -125,6 +320,7 @@
       </div>
     </div>
   </nav>
+
   <!-- Navigation ends -->
   <!-- Page title starts -->
   <div class="bg-gradient-to-tl from-yellow-300 to-purple-600 w-full">
@@ -187,7 +383,7 @@
           }"
           class="rounded-t w-32 h-12 flex items-center justify-center hover:bg-white mx-1 text-sm text-gray-800"
         >
-           My trip requests
+          My trip requests
         </li>
       </ul>
     </div>
@@ -274,6 +470,7 @@
   <section v-if="sel == 'myTrips'" class="relative">
     <div class="container mx-auto px-6 mt-10 h-64">
       <div class="w-full overflow-x-scroll xl:overflow-x-hidden">
+        <p>{{ error }}</p>
         <table class="min-w-full bg-white dark:bg-gray-800">
           <thead>
             <tr class="w-full h-16 border-gray-300 border-b py-8">
@@ -328,6 +525,7 @@
                   role="button"
                   aria-label="login"
                   class="focus:ring-2 focus:ring-offset-2 focus:ring-red-500 text-sm font-semibold leading-none text-white focus:outline-none bg-red-500 border rounded hover:bg-red-400 py-4 w-full"
+                  @click="idDelete = `${t.id}`,deleteThistrip() "
                 >
                   Delete
                 </button>
@@ -428,13 +626,20 @@
 </template>
 
 <script>
-import router from "../router"
-import { getUser, getUserTrips} from "../api/api";
+import router from "../router";
+import {
+  getUser,
+  getUserTrips,
+  logout,
+  makeNewTrip,
+  findPlaces,
+  deleteTheTrip,
+} from "../api/api";
+
 
 export default {
   name: "LightWithTabs",
   data() {
-
     const Holland = {
       id: 1,
       name: "Tom",
@@ -457,11 +662,11 @@ export default {
     };
 
     return {
-      sel: "myProfile",
       profilePhoto:
         "https://tuk-cdn.s3.amazonaws.com/assets/components/boxed_layout/bl_1.png",
       myTravels: [],
       travels: [Holland, Felton],
+      error: "",
 
       user: {
         id: 0,
@@ -471,10 +676,26 @@ export default {
         email: "",
         password: "",
       },
+
+      makeNewTripStartPoints: [],
+      makeNewTripFinishPoints: [],
+
+      makeTripStartPoint: "",
+      makeTripFinishPoint: "",
+      makeTripStartDate: "",
+      makeTripFinishDate: "",
+      errorTrip: "",
+
+      modalWindow: false,
+      successfully: false,
+
+      sel: 'myTrips',
+
+      idDelete: 0,
     };
   },
 
-mounted() {
+  mounted() {
     getUser(
       (data) => {
         this.user = data;
@@ -494,9 +715,131 @@ mounted() {
     );
   },
 
+  watch: {
+    makeTripStartPoint() {
+      if (this.updateTimeout) {
+        clearTimeout(this.updateTimeout);
+        this.updateTimeout = null;
+      }
+      this.updateTimeout = setTimeout(this.updateResults2, 200);
+    },
+
+    makeTripFinishPoint() {
+      if (this.updateTimeout) {
+        clearTimeout(this.updateTimeout);
+        this.updateTimeout = null;
+      }
+      this.updateTimeout = setTimeout(this.updateResults3, 200);
+    },
+  },
+
   methods: {
-    goHome(){
-      router.push({name: "Home"})
+    makingTrip() {
+      makeNewTrip(
+        this.makeTripStartPoint,
+        this.makeTripFinishPoint,
+        this.makeTripStartDate,
+        this.makeTripFinishDate,
+        () => {
+          this.fadeOut();
+          this.successfully = true;
+        },
+        (error) => {
+          this.errorTrip = error.response.data.errorMessage;
+        }
+      );
+    },
+
+    doLogout() {
+      logout(
+        () => {
+          this.user = "";
+          localStorage.removeItem("Token");
+          this.goHome();
+        },
+        (error) => {
+          this.error = error.message;
+        }
+      );
+    },
+
+    deleteThistrip() {
+      deleteTheTrip(
+        this.idDelete,
+        () => {
+        },
+        (error) => {
+          this.error = error.message;
+        }
+      );
+    },
+
+    updateResults2() {
+      this.makeTripStartPoint = this.makeTripStartPoint.trim();
+      if (this.makeTripStartPoint.length <= 0) {
+        this.makeNewTripStartPoints = [];
+        return;
+      }
+
+      findPlaces(
+        encodeURI(this.makeTripStartPoint),
+        (res) => {
+          this.makeNewTripStartPoints = res;
+        },
+        (error) => {
+          this.error = error.message;
+        }
+      );
+    },
+
+    updateResults3() {
+      this.makeTripFinishPoint = this.makeTripFinishPoint.trim();
+      if (this.makeTripFinishPoint.length <= 0) {
+        this.makeNewTripFinishPoints = [];
+        return;
+      }
+
+      findPlaces(
+        encodeURI(this.makeTripFinishPoint),
+        (res) => {
+          this.makeNewTripFinishPoints = res;
+        },
+        (error) => {
+          this.error = error.message;
+        }
+      );
+    },
+
+    fadeOut() {
+      let el = document.getElementById("modal");
+      el.style.opacity = 1;
+      (function fade() {
+        if ((el.style.opacity -= 0.1) < 0) {
+          el.style.display = "none";
+        } else {
+          requestAnimationFrame(fade);
+        }
+      })();
+    },
+    fadeIn(display) {
+      if (this.user) {
+        let el = document.getElementById("modal");
+        el.style.opacity = 0;
+        el.style.display = display || "flex";
+        (function fade() {
+          let val = parseFloat(el.style.opacity);
+          if (!((val += 0.2) > 1)) {
+            el.style.opacity = val;
+            requestAnimationFrame(fade);
+          }
+        })();
+      } else {
+        this.signIn();
+      }
+    },
+
+    goHome() {
+      router.push({ name: "Home" });
     },
 
     signIn() {
@@ -529,3 +872,37 @@ mounted() {
   },
 };
 </script>
+
+<style scoped>
+.results {
+  background-color: white;
+  max-height: 300px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .result {
+    position: relative;
+    background-color: white;
+    height: 32px;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: rgb(50, 50, 50);
+
+    &:hover {
+      background-color: rgb(240, 240, 240);
+    }
+
+    p {
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      padding-left: 15px;
+    }
+  }
+}
+</style>

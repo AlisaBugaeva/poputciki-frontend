@@ -16,6 +16,7 @@ axios.interceptors.response.use(
       error.response &&
       error.response.status === 401
     ) {
+      //localStorage.removeItem("Token");
       return; // have to reset token!
     }
     throw error;

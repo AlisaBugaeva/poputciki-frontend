@@ -32,12 +32,28 @@ export const getUserTrips = async (okCallback, errorCallback) => {
   }
 };
 
-
+export const makeNewTrip = async (start, finish, startDate, finishDate, okCallback, errorCallback) => {
+  try {
+    await axios.post(`/trips/new`, {start, finish, startDate, finishDate});
+    okCallback();
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
 
 export const tripSearch = async (startPoint, finishPoint, startDate,okCallback, errorCallback) => {
   try {
     const response = await axios.get(`/trips/search?fromTime=${startDate}&fromPoint=${startPoint}&toPoint=${finishPoint}&limit=5&page=0`);
     okCallback(response.data);
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
+export const deleteTheTrip = async (id,okCallback, errorCallback) => {
+  try {
+    await axios.delete(`/trips/${id}/delete`);
+    okCallback();
   } catch (e) {
     return errorCallback(e);
   }
@@ -80,6 +96,15 @@ export const getUser = async (okCallback, errorCallback) => {
   try {
     const response = await axios.get(`/user/info`);
     okCallback(response.data);
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
+export const logout = async (okCallback, errorCallback) => {
+  try {
+    await axios.post(`/auth/logout`);
+    okCallback();
   } catch (e) {
     return errorCallback(e);
   }
