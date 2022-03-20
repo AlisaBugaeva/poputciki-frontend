@@ -13,7 +13,7 @@
           <p
             class="text-xl text-base text-gray-800 font-bold tracking-normal leading-tight ml-3 hidden lg:block"
           >
-            Poputciki
+            Poputchiki
           </p>
         </div>
 

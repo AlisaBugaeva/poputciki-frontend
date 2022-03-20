@@ -16,7 +16,7 @@ export const getTop5Places = async (okCallback, errorCallback) => {
 
 export const getNewTrips = async (okCallback, errorCallback) => {
   try {
-    const response = await axios.get(`/trips/latest?limit=4&page=0`);
+    const response = await axios.get(`/trips/latest?limit=6&page=0`);
     okCallback(response.data);
   } catch (e) {
     return errorCallback(e);
@@ -54,6 +54,60 @@ export const deleteTheTrip = async (id,okCallback, errorCallback) => {
   try {
     await axios.delete(`/trips/${id}/delete`);
     okCallback();
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
+export const joinTheTrip = async (id,okCallback, errorCallback) => {
+  try {
+    await axios.post(`/trips/${id}/join`);
+    okCallback();
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
+export const findPoputchiki = async (id,okCallback, errorCallback) => {
+  try {
+    const response =await axios.get(`/poputchiki/${id}/view`);
+    okCallback(response.data);
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
+export const acceptRequest = async (idPoputchik, idTravel,okCallback, errorCallback) => {
+  try {
+    await axios.post(`/poputchiki/${idPoputchik}/${idTravel}/accept`);
+    okCallback();
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
+export const rejectRequest = async (idPoputchik, idTravel,okCallback, errorCallback) => {
+  try {
+    await axios.post(`/poputchiki/${idPoputchik}/${idTravel}/reject`);
+    okCallback();
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
+export const getUserRequests = async (okCallback, errorCallback) => {
+  try {
+    const response = await axios.get(`/poputchiki/requests`);
+    okCallback(response.data);
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
+export const getAcceptedRequests = async (okCallback, errorCallback) => {
+  try {
+    const response = await axios.get(`/poputchiki/acceptedRequests`);
+    okCallback(response.data);
   } catch (e) {
     return errorCallback(e);
   }
@@ -100,6 +154,16 @@ export const getUser = async (okCallback, errorCallback) => {
     return errorCallback(e);
   }
 };
+
+export const editUser = async (name,surname,phoneNumber, okCallback, errorCallback) => {
+  try {
+    const response = await axios.patch(`/user/edit`,{name,surname,phoneNumber});
+    okCallback(response.data);
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
 
 export const logout = async (okCallback, errorCallback) => {
   try {

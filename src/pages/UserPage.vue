@@ -16,7 +16,7 @@
             class="text-base text-gray-800 font-bold tracking-normal leading-tight ml-3 hidden lg:block"
             @click="goHome()"
           >
-            Poputciki
+            Poputchiki
           </h3>
         </div>
 
@@ -177,10 +177,11 @@
               </h3>
 
               <div class="flex items-center justify-start w-full">
-                
                 <button
                   class="focus:outline-none transition duration-150 ease-in-out hover:bg-green-500 bg-green-600 rounded text-white px-8 py-2 text-sm"
-                  @click="sel = 'myTrips',successfully = false, getUserTrips"
+                  @click="
+                    (sel = 'myTrips'), (successfully = false), getUserTrips
+                  "
                 >
                   Go to your trips
                 </button>
@@ -188,6 +189,101 @@
               <div
                 class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
                 @click="fadeOut()"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-label="Close"
+                  class="icon icon-tabler icon-tabler-x"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  stroke-width="2.5"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="py-12 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
+          id="modal"
+          v-if="requests"
+        >
+          <div role="alert" class="container mx-auto w-11/12 md:w-2/3 max-w-lg">
+            <div
+              class="relative py-8 px-5 md:px-10 bg-white shadow-md rounded border border-gray-400"
+            >
+              <h1
+                class="text-gray-800 font-lg font-bold tracking-normal leading-tight mb-4"
+              >
+                Requests
+              </h1>
+              <div class="container px-6 mx-auto mt-10">
+                <!-- Remove class [ h-64 ] when adding a card block -->
+                <div
+                  class="rounded shadow relative bg-white z-10 -mt-8 mb-8 w-full"
+                >
+                  <div
+                    class="mt-7 overflow-x-auto items-center justify-center py-3 px-4"
+                  >
+                    <table class="w-full whitespace-nowrap">
+                      <tbody v-for="p in poputchiki" :key="p.id">
+                        <tr class="h-3"></tr>
+                        <tr
+                          tabindex="0"
+                          class="focus:outline-none h-16 border border-gray-100 rounded"
+                        >
+                          <td class="pr-6 whitespace-no-wrap">
+                            <div class="flex items-center">
+                              <div class="h-8 w-8">
+                                <img
+                                  src="https://tuk-cdn.s3.amazonaws.com/assets/components/advance_tables/at_1.png"
+                                  alt=""
+                                  class="h-full w-full rounded-full overflow-hidden shadow"
+                                />
+                              </div>
+                              <p
+                                class="ml-2 text-gray-800 dark:text-gray-100 tracking-normal leading-4 text-sm"
+                              >
+                                {{ p.name }} {{ p.surname }}
+                              </p>
+                            </div>
+                          </td>
+                          <td class="pl-5">
+                            <button
+                              class="focus:ring-2 focus:ring-offset-2 text-sm leading-none text-gray-600 py-3 px-5 bg-green-200 rounded hover:bg-green-100 focus:outline-none"
+                              @click=" idPoputchik = `${p.id}`, accepting()"
+                            >
+                              Accept
+                            </button>
+                          </td>
+                          <td class="pl-5">
+                            <button
+                              class="focus:ring-2 focus:ring-offset-2 text-sm leading-none text-gray-600 py-3 px-5 bg-red-200 rounded hover:bg-red-100 focus:outline-none"
+                              @click=" idPoputchik = `${p.id}`, rejecting()"
+                            >
+                              Reject
+                            </button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+
+              
+              <div
+                class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+                @click="fadeOut(), requests = false"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -262,30 +358,6 @@
                     </svg>
                     <span class="ml-2" @click="doLogout()"> Sign out </span>
                   </div>
-                </li>
-                <li
-                  class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="icon icon-tabler icon-tabler-help"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    stroke-width="1.5"
-                    stroke="currentColor"
-                    fill="none"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  >
-                    <path stroke="none" d="M0 0h24v24H0z" />
-                    <circle cx="12" cy="12" r="9" />
-                    <line x1="12" y1="17" x2="12" y2="17.01" />
-                    <path
-                      d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4"
-                    />
-                  </svg>
-                  <span class="ml-2"> Help Center </span>
                 </li>
               </ul>
               <img
@@ -385,6 +457,16 @@
         >
           My trip requests
         </li>
+        <li
+          @click="sel = 'acceptedRequests'"
+          :class="{
+            'bg-white': sel == 'acceptedRequests',
+            'bg-gray-300': sel != 'acceptedRequests',
+          }"
+          class="rounded-t w-32 h-12 flex items-center justify-center hover:bg-white mx-1 text-sm text-gray-800"
+        >
+          Accepted requests
+        </li>
       </ul>
     </div>
   </div>
@@ -424,6 +506,7 @@
               tabindex="0"
               aria-label="Enter last name"
               class="w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"
+              @input="(e) => (editSurname = e.target.value)"
               :value="`${user.surname}`"
             />
           </div>
@@ -459,8 +542,10 @@
           aria-label="Next step"
           class="flex items-center justify-center py-4 px-7 focus:outline-none bg-white border rounded border-gray-400 mt-7 md:mt-14 hover:bg-gray-100 focus:ring-2 focus:ring-offset-2 focus:ring-gray-700"
         >
-          <span class="text-sm font-medium text-center text-gray-800 capitalize"
-            >Edit info</span
+          <span
+            class="text-sm font-medium text-center text-gray-800 capitalize"
+            @click="(user.surname = editSurname), editingUser()"
+            >Save info</span
           >
         </button>
       </div>
@@ -494,6 +579,11 @@
               >
                 <b>Destination date</b>
               </th>
+              <th
+                class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
+              >
+                <b>Number of requests</b>
+              </th>
             </tr>
           </thead>
           <tbody v-for="t in myTravels" :key="t.start">
@@ -520,12 +610,19 @@
               </td>
               <td
                 class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
+                @click=" (idRequest = `${t.id}`),seeRequests()"
+              >
+                {{ t.numRequests }}
+                <p text-gray-500>(click here to see them)</p>
+              </td>
+              <td
+                class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
               >
                 <button
                   role="button"
                   aria-label="login"
                   class="focus:ring-2 focus:ring-offset-2 focus:ring-red-500 text-sm font-semibold leading-none text-white focus:outline-none bg-red-500 border rounded hover:bg-red-400 py-4 w-full"
-                  @click="idDelete = `${t.id}`,deleteThistrip() "
+                  @click="(idDelete = `${t.id}`), deleteThistrip()"
                 >
                   Delete
                 </button>
@@ -552,6 +649,11 @@
                 class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
               >
                 <b>Surname</b>
+              </th>
+              <th
+                class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
+              >
+                <b>Email</b>
               </th>
               <th
                 class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
@@ -590,7 +692,12 @@
               <td
                 class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
               >
-                {{ t.surnsme }}
+                {{ t.surname }}
+              </td>
+              <td
+                class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
+              >
+                {{ t.email }}
               </td>
               <td
                 class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
@@ -623,6 +730,94 @@
       </div>
     </div>
   </section>
+
+
+  <section v-if="sel == 'acceptedRequests'" class="relative">
+    <div class="container mx-auto px-6 mt-10 h-64">
+      <div class="w-full overflow-x-scroll xl:overflow-x-hidden">
+        <table class="min-w-full bg-white dark:bg-gray-800">
+          <thead>
+            <tr class="w-full h-16 border-gray-300 border-b py-8">
+              <th
+                class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
+              >
+                <b>Name</b>
+              </th>
+              <th
+                class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
+              >
+                <b>Surname</b>
+              </th>
+              <th
+                class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
+              >
+                <b>Email</b>
+              </th>
+              <th
+                class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
+              >
+                <b>Departure point</b>
+              </th>
+              <th
+                class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
+              >
+                <b>Destination point</b>
+              </th>
+              <th
+                class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
+              >
+                <b>Departure date</b>
+              </th>
+              <th
+                class="text-gray-600 dark:text-gray-400 font-normal pr-6 text-left text-sm tracking-normal leading-4"
+              >
+                <b>Destination date</b>
+              </th>
+            </tr>
+          </thead>
+          <tbody v-for="t in acceptedRequests" :key="t.email">
+            <tr class="h-24 border-gray-300 border-b">
+              <td
+                class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
+              >
+                {{ t.name }}
+              </td>
+              <td
+                class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
+              >
+                {{ t.surname }}
+              </td>
+              <td
+                class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
+              >
+                {{ t.email }}
+              </td>
+              <td
+                class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
+              >
+                {{ t.departurePoint }}
+              </td>
+              <td
+                class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
+              >
+                {{ t.destinationPoint }}
+              </td>
+              <td
+                class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
+              >
+                {{ t.departureDate }}
+              </td>
+              <td
+                class="text-sm pr-6 whitespace-no-wrap text-gray-800 dark:text-gray-100 tracking-normal leading-4"
+              >
+                {{ t.destinationDate }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
 </template>
 
 <script>
@@ -634,38 +829,24 @@ import {
   makeNewTrip,
   findPlaces,
   deleteTheTrip,
+  editUser,
+  findPoputchiki,
+  acceptRequest,
+  rejectRequest,
+  getUserRequests,
+  getAcceptedRequests,
 } from "../api/api";
-
 
 export default {
   name: "LightWithTabs",
   data() {
-    const Holland = {
-      id: 1,
-      name: "Tom",
-      surnsme: "Holland",
-      departurePoint: "Moskow",
-      destinationPoint: "Kazan",
-      departureDate: "10.02.2022",
-      destinationDate: "22.02.2022",
-      status: "NEW",
-    };
-    const Felton = {
-      id: 2,
-      name: "Tom",
-      surnsme: "Felton",
-      departurePoint: "Moskow",
-      destinationPoint: "Tula",
-      departureDate: "14.03.2022",
-      destinationDate: "17.03.2022",
-      status: "ACCEPTED",
-    };
-
+    
     return {
       profilePhoto:
         "https://tuk-cdn.s3.amazonaws.com/assets/components/boxed_layout/bl_1.png",
       myTravels: [],
-      travels: [Holland, Felton],
+      travels: [],
+      acceptedRequests:[],
       error: "",
 
       user: {
@@ -676,6 +857,8 @@ export default {
         email: "",
         password: "",
       },
+
+      editSurname: "",
 
       makeNewTripStartPoints: [],
       makeNewTripFinishPoints: [],
@@ -688,10 +871,16 @@ export default {
 
       modalWindow: false,
       successfully: false,
+      requests: false,
 
-      sel: 'myTrips',
+      sel: "myTrips",
 
       idDelete: 0,
+      idRequest:0,
+      idPoputchik:0,
+
+      poputchiki:[],
+      
     };
   },
 
@@ -708,6 +897,24 @@ export default {
     getUserTrips(
       (data) => {
         this.myTravels = data;
+      },
+      (error) => {
+        this.error = error.message;
+      }
+    );
+
+    getUserRequests(
+      (data) => {
+        this.travels = data;
+      },
+      (error) => {
+        this.error = error.message;
+      }
+    );
+
+    getAcceptedRequests(
+      (data) => {
+        this.acceptedRequests = data;
       },
       (error) => {
         this.error = error.message;
@@ -743,6 +950,14 @@ export default {
         () => {
           this.fadeOut();
           this.successfully = true;
+          getUserTrips(
+            (data) => {
+              this.myTravels = data;
+            },
+            (error) => {
+              this.error = error.message;
+            }
+          );
         },
         (error) => {
           this.errorTrip = error.response.data.errorMessage;
@@ -763,10 +978,82 @@ export default {
       );
     },
 
+    seeRequests(){
+      findPoputchiki(this.idRequest,
+            (data) => {
+              this.poputchiki = data;
+              this.requests= true;
+            },
+            (error) => {
+              this.error = error.message;
+            }
+          );
+    },
+
+    accepting(){
+      acceptRequest(this.idPoputchik,this.idRequest,
+            () => {
+              this.seeRequests();
+              getUserTrips(
+            (data) => {
+              this.myTravels = data;
+            },
+            (error) => {
+              this.error = error.message;
+            }
+          );
+            },
+            (error) => {
+              this.error = error.message;
+            }
+          );
+    },
+
+    rejecting(){
+      rejectRequest(this.idPoputchik,this.idRequest,
+            () => {
+              this.seeRequests();
+              getUserTrips(
+                (data) => {
+              this.myTravels = data;
+              },
+              (error) => {
+                this.error = error.message;
+              }
+              );
+            },
+            (error) => {
+              this.error = error.message;
+            }
+          );
+    },
+
     deleteThistrip() {
       deleteTheTrip(
         this.idDelete,
         () => {
+          getUserTrips(
+            (data) => {
+              this.myTravels = data;
+            },
+            (error) => {
+              this.error = error.message;
+            }
+          );
+        },
+        (error) => {
+          this.error = error.message;
+        }
+      );
+    },
+
+    editingUser() {
+      editUser(
+        this.user.name,
+        this.user.surname,
+        this.user.phoneNumber,
+        (data) => {
+          this.user = data;
         },
         (error) => {
           this.error = error.message;

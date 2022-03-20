@@ -15,7 +15,7 @@
             <h3
               class="text-base text-gray-800 font-bold tracking-normal leading-tight ml-3 hidden lg:block"
             >
-              Poputciki
+              Poputchiki
             </h3>
           </div>
 
@@ -160,6 +160,62 @@
             </div>
           </div>
 
+
+          <div
+            class="py-12 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
+            id="modal"
+            v-if="successfulJoin"
+          >
+            <div
+              role="alert"
+              class="container mx-auto w-11/12 md:w-2/3 max-w-lg"
+            >
+              <div
+                class="relative py-8 px-5 md:px-10 bg-green-200 shadow-md rounded border border-gray-400"
+              >
+                <h1 class="text-gray-800 font-bold tracking-normal mb-4">
+                  Successfully!
+                </h1>
+                <h3
+                  class="text-gray-800 font-lg tracking-normal leading-tight mb-4"
+                >
+                  Your application to join the tip has been sent
+                </h3>
+
+                <div class="flex items-center justify-start w-full">
+                  <button
+                    class="focus:outline-none transition duration-150 ease-in-out hover:bg-green-500 bg-green-600 rounded text-white px-8 py-2 text-sm"
+                    @click="successfulJoin = false, userPage()"
+                  >
+                    Go to your trips
+                  </button>
+                </div>
+                <div
+                  class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
+                  @click="fadeOut(), successfulJoin = false"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-label="Close"
+                    class="icon icon-tabler icon-tabler-x"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    stroke-width="2.5"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
           <div
             class="py-12 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
             id="modal"
@@ -268,30 +324,6 @@
                       </svg>
                       <span @click="doLogout()" class="ml-2"> Sign out </span>
                     </div>
-                  </li>
-                  <li
-                    class="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal mt-2 py-2 hover:text-indigo-700 focus:text-indigo-700 focus:outline-none flex items-center"
-                  >
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      class="icon icon-tabler icon-tabler-help"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      fill="none"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    >
-                      <path stroke="none" d="M0 0h24v24H0z" />
-                      <circle cx="12" cy="12" r="9" />
-                      <line x1="12" y1="17" x2="12" y2="17.01" />
-                      <path
-                        d="M12 13.5a1.5 1.5 0 0 1 1 -1.5a2.6 2.6 0 1 0 -3 -4"
-                      />
-                    </svg>
-                    <span class="ml-2"> Help Center </span>
                   </li>
                 </ul>
                 <img
@@ -490,7 +522,7 @@
                   <div class="flex items-center">
                     <div class="h-8 w-8">
                       <img
-                        src="https://tuk-cdn.s3.amazonaws.com/assets/components/advance_tables/at_1.png"
+                        src="https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png"
                         alt=""
                         class="h-full w-full rounded-full overflow-hidden shadow"
                       />
@@ -531,6 +563,7 @@
                 <td class="pl-5">
                   <button
                     class="focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none"
+                    @click="idJoin = `${t.id}`,joinThistrip() "
                   >
                     Join
                   </button>
@@ -651,6 +684,7 @@ import {
   getUser,
   makeNewTrip,
   logout,
+  joinTheTrip,
 } from "../api/api";
 
 require("vue-events");
@@ -694,8 +728,12 @@ export default {
       drop: false,
       drop1: false,
       drop2: true,
+
       modalWindow: false,
       successfully: false,
+      successfulJoin: false,
+
+      idJoin:0,
 
     };
   },
@@ -791,6 +829,19 @@ export default {
         },
         (error) => {
           this.errorTrip = error.response.data.errorMessage;
+        }
+      );
+    },
+
+
+    joinThistrip() {
+      joinTheTrip(
+        this.idJoin,
+        () => {
+          this.successfulJoin = true;
+        },
+        (error) => {
+          this.error = error.message;
         }
       );
     },
