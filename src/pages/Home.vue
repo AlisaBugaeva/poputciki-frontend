@@ -20,7 +20,7 @@
           </div>
 
           <div
-            class="py-12 bg-gray-700 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
+            class="py-12 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
             id="modal"
             v-if="modalWindow"
           >
@@ -160,7 +160,6 @@
             </div>
           </div>
 
-
           <div
             class="py-12 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
             id="modal"
@@ -185,14 +184,60 @@
                 <div class="flex items-center justify-start w-full">
                   <button
                     class="focus:outline-none transition duration-150 ease-in-out hover:bg-green-500 bg-green-600 rounded text-white px-8 py-2 text-sm"
-                    @click="successfulJoin = false, userPage()"
+                    @click="(successfulJoin = false), userPageRequests()"
                   >
-                    Go to your trips
+                    Go to your trip requests
                   </button>
                 </div>
                 <div
                   class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-400 hover:text-gray-600 transition duration-150 ease-in-out"
-                  @click="fadeOut(), successfulJoin = false"
+                  @click="fadeOut(), (successfulJoin = false)"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    aria-label="Close"
+                    class="icon icon-tabler icon-tabler-x"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    stroke-width="2.5"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" />
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="py-12 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
+            id="modal"
+            v-if="isError"
+          >
+            <div
+              role="alert"
+              class="container mx-auto w-11/12 md:w-2/3 max-w-lg"
+            >
+              <div
+                class="relative py-8 px-5 md:px-10 bg-red-400 shadow-md rounded border border-gray-400"
+              >
+                <h1 class="text-gray-800 font-bold tracking-normal mb-4">
+                  Error!
+                </h1>
+                <h3
+                  class="text-gray-800 font-lg tracking-normal leading-tight mb-4"
+                >
+                  {{ error }}
+                </h3>
+                <div
+                  class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-700 hover:text-gray-500 transition duration-150 ease-in-out"
+                  @click="fadeOut()"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -240,7 +285,7 @@
                 <div class="flex items-center justify-start w-full">
                   <button
                     class="focus:outline-none transition duration-150 ease-in-out hover:bg-green-500 bg-green-600 rounded text-white px-8 py-2 text-sm"
-                    @click="successfully = false, userPage()"
+                    @click="(successfully = false), userPageMyTrips()"
                   >
                     Go to your trips
                   </button>
@@ -563,7 +608,7 @@
                 <td class="pl-5">
                   <button
                     class="focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none"
-                    @click="idJoin = `${t.id}`,joinThistrip() "
+                    @click="(idJoin = `${t.id}`), joinThistrip()"
                   >
                     Join
                   </button>
@@ -732,8 +777,9 @@ export default {
       modalWindow: false,
       successfully: false,
       successfulJoin: false,
+      isError: false,
 
-      idJoin:0,
+      idJoin: 0,
 
     };
   },
@@ -745,6 +791,7 @@ export default {
           this.places = data;
         },
         (error) => {
+          this.isError = true;
           this.error = error.message;
         }
       );
@@ -754,6 +801,7 @@ export default {
         this.travels = data;
       },
       (error) => {
+        this.isError = true;
         this.error = error.message;
       }
     );
@@ -812,7 +860,8 @@ export default {
           this.travels = data;
         },
         (error) => {
-          this.error = error.message;
+          this.isError = true;
+          this.error = error.errorMessage;
         }
       );
     },
@@ -833,7 +882,6 @@ export default {
       );
     },
 
-
     joinThistrip() {
       joinTheTrip(
         this.idJoin,
@@ -841,6 +889,7 @@ export default {
           this.successfulJoin = true;
         },
         (error) => {
+          this.isError = true;
           this.error = error.message;
         }
       );
@@ -853,6 +902,7 @@ export default {
           localStorage.removeItem("Token");
         },
         (error) => {
+          this.isError = true;
           this.error = error.message;
         }
       );
@@ -871,6 +921,7 @@ export default {
           this.searchPlacesStart = res;
         },
         (error) => {
+          this.isError = true;
           this.error = error.message;
         }
       );
@@ -889,6 +940,7 @@ export default {
           this.searchPlacesFinish = res;
         },
         (error) => {
+          this.isError = true;
           this.error = error.message;
         }
       );
@@ -907,6 +959,7 @@ export default {
           this.makeNewTripStartPoints = res;
         },
         (error) => {
+          this.isError = true;
           this.error = error.message;
         }
       );
@@ -925,6 +978,7 @@ export default {
           this.makeNewTripFinishPoints = res;
         },
         (error) => {
+          this.isError = true;
           this.error = error.message;
         }
       );
@@ -939,7 +993,15 @@ export default {
     },
 
     userPage() {
-      router.push({ name: "UserPage" });
+      router.push({ name: "UserPage", params: { sel: "myProfile" } });
+    },
+
+    userPageRequests() {
+      router.push({ name: "UserPage", params: { sel: "myRequests" } });
+    },
+
+    userPageMyTrips() {
+      router.push({ name: "UserPage", params: { sel: "myTrips" } });
     },
 
     dropdownHandler(event) {

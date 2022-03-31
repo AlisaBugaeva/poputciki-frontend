@@ -212,6 +212,50 @@
           </div>
         </div>
 
+
+        <div
+          class="py-12 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
+          id="modal"
+          v-if="isError"
+        >
+          <div role="alert" class="container mx-auto w-11/12 md:w-2/3 max-w-lg">
+            <div
+              class="relative py-8 px-5 md:px-10 bg-red-400 shadow-md rounded border border-gray-400"
+            >
+              <h1 class="text-gray-800 font-bold tracking-normal mb-4">
+                Error!
+              </h1>
+              <h3
+                class="text-gray-800 font-lg tracking-normal leading-tight mb-4"
+              >
+                {{error}}
+              </h3>
+              <div
+                class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-700 hover:text-gray-500 transition duration-150 ease-in-out"
+                @click="fadeOut()"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  aria-label="Close"
+                  class="icon icon-tabler icon-tabler-x"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  stroke-width="2.5"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z" />
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div
           class="py-12 transition duration-150 ease-in-out z-10 absolute top-0 right-0 bottom-0 left-0"
           id="modal"
@@ -245,8 +289,8 @@
                             <div class="flex items-center">
                               <div class="h-8 w-8">
                                 <img
-                                  src="https://tuk-cdn.s3.amazonaws.com/assets/components/advance_tables/at_1.png"
-                                  alt=""
+                                  src="https://okeygeek.ru/wp-content/uploads/2020/03/no_avatar.png"
+                                  alt="avatar"
                                   class="h-full w-full rounded-full overflow-hidden shadow"
                                 />
                               </div>
@@ -430,8 +474,8 @@
         <li
           @click="sel = 'myProfile'"
           :class="{
-            'bg-white': sel == 'myProfile',
-            'bg-gray-300': sel != 'myProfile',
+            'bg-white': sel == 'myProfile' || sel == '',
+            'bg-gray-300': sel != 'myProfile' && sel != '',
           }"
           class="rounded-t w-32 h-12 flex items-center justify-center hover:bg-white mx-1 text-sm text-gray-800"
         >
@@ -472,7 +516,7 @@
   </div>
   <!-- Page title ends -->
   <!-- Remove class [ h-64 ] when adding a card block -->
-  <section v-if="sel == 'myProfile'" class="relative">
+  <section v-if="sel == 'myProfile' || sel == '' " class="relative" >
     <div class="container mx-auto px-6 mt-10 h-64">
       <!-- Remove class [ border-dashed border-2 border-gray-300 ] to remove dotted border -->
       <div class="w-full bg-white p-10">
@@ -872,8 +916,9 @@ export default {
       modalWindow: false,
       successfully: false,
       requests: false,
+      isError: false,
 
-      sel: "myTrips",
+      sel: this.$route.params.sel,
 
       idDelete: 0,
       idRequest:0,
@@ -885,6 +930,7 @@ export default {
   },
 
   mounted() {
+
     getUser(
       (data) => {
         this.user = data;
@@ -899,6 +945,7 @@ export default {
         this.myTravels = data;
       },
       (error) => {
+        this.isError = true;
         this.error = error.message;
       }
     );
@@ -908,6 +955,7 @@ export default {
         this.travels = data;
       },
       (error) => {
+        this.isError = true;
         this.error = error.message;
       }
     );
@@ -917,6 +965,7 @@ export default {
         this.acceptedRequests = data;
       },
       (error) => {
+        this.isError = true;
         this.error = error.message;
       }
     );
@@ -955,6 +1004,7 @@ export default {
               this.myTravels = data;
             },
             (error) => {
+              this.isError = true;
               this.error = error.message;
             }
           );
@@ -973,6 +1023,7 @@ export default {
           this.goHome();
         },
         (error) => {
+          this.isError = true;
           this.error = error.message;
         }
       );
@@ -985,6 +1036,7 @@ export default {
               this.requests= true;
             },
             (error) => {
+              this.isError = true;
               this.error = error.message;
             }
           );
@@ -999,11 +1051,13 @@ export default {
               this.myTravels = data;
             },
             (error) => {
+              this.isError = true;
               this.error = error.message;
             }
           );
             },
             (error) => {
+              this.isError = true;
               this.error = error.message;
             }
           );
@@ -1018,11 +1072,13 @@ export default {
               this.myTravels = data;
               },
               (error) => {
+                this.isError = true;
                 this.error = error.message;
               }
               );
             },
             (error) => {
+              this.isError = true;
               this.error = error.message;
             }
           );
@@ -1037,11 +1093,13 @@ export default {
               this.myTravels = data;
             },
             (error) => {
+              this.isError = true;
               this.error = error.message;
             }
           );
         },
         (error) => {
+          this.isError = true;
           this.error = error.message;
         }
       );
@@ -1056,6 +1114,7 @@ export default {
           this.user = data;
         },
         (error) => {
+          this.isError = true;
           this.error = error.message;
         }
       );
@@ -1074,6 +1133,7 @@ export default {
           this.makeNewTripStartPoints = res;
         },
         (error) => {
+          this.isError = true;
           this.error = error.message;
         }
       );
@@ -1092,6 +1152,7 @@ export default {
           this.makeNewTripFinishPoints = res;
         },
         (error) => {
+          this.isError = true;
           this.error = error.message;
         }
       );
