@@ -113,6 +113,41 @@ export const getAcceptedRequests = async (okCallback, errorCallback) => {
   }
 };
 
+export const viewMessages = async (idPoputchik, okCallback, errorCallback) => {
+  try {
+    const response = await axios.get(`/message/${idPoputchik}/view`);
+    okCallback(response.data);
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
+export const countUnreadMessages = async (okCallback, errorCallback) => {
+  try {
+    const response = await axios.get(`/message/unread`);
+    okCallback(response.data);
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
+export const readMessages = async (idPoputchik, okCallback, errorCallback) => {
+  try {
+    await axios.post(`/message/${idPoputchik}/read`);
+    okCallback();
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
+
+export const viewDialogs = async (okCallback, errorCallback) => {
+  try {
+    const response = await axios.get(`/message/dialogs`);
+    okCallback(response.data);
+  } catch (e) {
+    return errorCallback(e);
+  }
+};
 
 export const findPlaces = async (name, okCallback, errorCallback) => {
   try {
