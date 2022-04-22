@@ -187,6 +187,15 @@ export default {
 
     sendingMessage() {
       sendMessage(this.idPoputchik);
+      viewMessages(
+      this.idPoputchik,
+      (data) => {
+        this.messages = data;
+      },
+      () => {
+        this.messages = "";
+      }
+    );
     },
   },
 };

@@ -813,7 +813,6 @@
                   @click="
                     (idPoputchik = `${t.id}`),
                       (chat = true),
-                      seeChat(),
                       (chatName = `${t.name} ${t.surname}`)
                   "
                 >
@@ -913,7 +912,6 @@
                   @click="
                     (idPoputchik = `${t.id}`),
                       (chat = true),
-                      seeChat(),
                       (chatName = `${t.name} ${t.surname}`)
                   "
                 >
@@ -943,8 +941,8 @@
                 @click="
                     (idPoputchik = `${d.id}`),
                       (chat = true),
-                      seeChat(),
-                      (chatName = `${d.name} ${d.surname}`)"
+                      (chatName = `${d.name} ${d.surname}`)
+                      "
               >
                 <td class="pr-6 whitespace-no-wrap">
                   <div class="flex items-center">
