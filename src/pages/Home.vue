@@ -328,6 +328,35 @@
         <div class="h-full xl:flex hidden items-center justify-end">
           <div class="h-full flex items-center">
             <div class="w-32 pr-16 h-full flex items-center justify-end"></div>
+            <div
+              class="h-full w-20 flex items-center justify-center border-r border-l"
+              @click="userPageChats()"
+            >
+              <div class="relative cursor-pointer text-gray-600">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="icon icon-tabler icon-tabler-bell"
+                  width="28"
+                  height="28"
+                  viewBox="0 0 24 24"
+                  stroke-width="1.5"
+                  stroke="currentColor"
+                  fill="none"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path stroke="none" d="M0 0h24v24H0z"></path>
+                  <path
+                    d="M10 5a2 2 0 0 1 4 0a7 7 0 0 1 4 6v3a4 4 0 0 0 2 3h-16a4 4 0 0 0 2 -3v-3a7 7 0 0 1 4 -6"
+                  ></path>
+                  <path d="M9 17v1a3 3 0 0 0 6 0v-1"></path>
+                </svg>
+                <div
+                  class="w-2 h-2 rounded-full bg-red-400 border border-white absolute inset-0 mt-1 mr-1 m-auto"
+                  v-if="countMessages!=0"
+                ></div>
+              </div>
+            </div>
             <div class="w-full h-full flex">
               <div v-if="!user" class="justify-center py-4 px-4" id="button">
                 <button
@@ -337,7 +366,6 @@
                   Login
                 </button>
               </div>
-
               <div
                 v-else
                 aria-haspopup="true"
@@ -730,6 +758,7 @@ import {
   makeNewTrip,
   logout,
   joinTheTrip,
+  countUnreadMessages,
 } from "../api/api";
 
 require("vue-events");
@@ -780,7 +809,7 @@ export default {
       isError: false,
 
       idJoin: 0,
-
+      countMessages:0,
     };
   },
 
@@ -812,6 +841,16 @@ export default {
       },
       () => {
         this.user = "";
+      }
+    );
+
+    countUnreadMessages(
+      (data) => {
+        this.countMessages = data;
+      },
+      (error) => {
+        this.isError = true;
+        this.error = error.message;
       }
     );
   },
@@ -1002,6 +1041,10 @@ export default {
 
     userPageMyTrips() {
       router.push({ name: "UserPage", params: { sel: "myTrips" } });
+    },
+
+    userPageChats() {
+      router.push({ name: "UserPage", params: { sel: "chats" } });
     },
 
     dropdownHandler(event) {
