@@ -32,7 +32,7 @@
             v-for="t in messages"
             :key="t.id"
           >
-            <div class="chat-message" v-if="t.mine == true">
+            <div class="chat-message" v-if="t.userId == userId">
               <div class="flex items-end justify-end">
                 <div
                   class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-1 items-end"
@@ -47,7 +47,7 @@
                 </div>
               </div>
             </div>
-            <div class="chat-message" v-if="t.mine == false">
+            <div class="chat-message" v-if="t.userId != userId">
               <div class="flex items-end">
                 <div
                   class="flex flex-col space-y-2 text-xs max-w-xs mx-2 order-2 items-start"
@@ -62,35 +62,34 @@
               </div>
             </div>
           </div>
-          <div class="border-t-2 border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
-            <div class="relative flex">
+
+          <div class="relative flex px-4 pt-4 mb-2 sm:mb-0 border-t-2">
+            <div class="border-gray-200">
               <input
                 id="text"
                 type="text"
-                class="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3"
+                class="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 pr-12 bg-gray-200 rounded-md py-3"
                 @input="(e) => (textMessage = e.target.value)"
                 :value="textMessage"
               />
-              <div
-                class="absolute right-0 items-center inset-y-0 hidden sm:flex"
+            </div>
+            <div class="right-0 items-center inset-y-0 hidden sm:flex">
+              <button
+                type="button"
+                class="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none"
+                @click="sendingMessage()"
               >
-                <button
-                  type="button"
-                  class="inline-flex items-center justify-center rounded-lg px-4 py-3 transition duration-500 ease-in-out text-white bg-blue-500 hover:bg-blue-400 focus:outline-none"
-                  @click="sendingMessage()"
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  class="h-6 w-6 ml-2 transform rotate-90"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    class="h-6 w-6 ml-2 transform rotate-90"
-                  >
-                    <path
-                      d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"
-                    ></path>
-                  </svg>
-                </button>
-              </div>
+                  <path
+                    d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z"
+                  ></path>
+                </svg>
+              </button>
             </div>
           </div>
         </div>
@@ -137,6 +136,7 @@ export default {
   props: {
     chatName: String,
     idPoputchik: Number,
+    userId: Number,
   },
   emits: { close: null, countMessages: null },
 
@@ -173,8 +173,6 @@ export default {
 
     connect(this.idPoputchik, (msg) => {
       this.messages.push(JSON.parse(msg.body));
-      //console.log("m1: " + msg.body);
-      //console.log("m2: " + this.messages[1]);
     });
   },
 
@@ -192,8 +190,8 @@ export default {
     },
 
     sendingMessage() {
-      sendMessage(this.idPoputchik,this.textMessage);
-
+      sendMessage(this.idPoputchik, this.textMessage);
+      this.textMessage = "";
     },
   },
 };

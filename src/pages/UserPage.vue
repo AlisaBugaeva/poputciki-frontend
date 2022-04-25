@@ -981,7 +981,7 @@
       </div>
     </div>
   </section>
-<Chat :chatName="chatName" :idPoputchik="idPoputchik" @close="chat=false" v-if="chat"/>
+<Chat :chatName="chatName" :idPoputchik="idPoputchik" :userId="user.id" @close="chat=false" v-if="chat"/>
 </template>
 
 <script>
