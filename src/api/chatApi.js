@@ -22,10 +22,9 @@ export function disconnect() {
   console.log("Disconnected");
 }
 
-export function sendMessage(idPoputchik) {
-    var text = document.getElementById('text').value;
+export function sendMessage(idPoputchik, textMessage) {
     stompClient.send("/app/chat", { token: localStorage.getItem('Token')}, 
-      JSON.stringify({'text':text, 'idPoputchik': idPoputchik}));
+      JSON.stringify({'text':textMessage, 'idPoputchik': idPoputchik}));
 }
 
 

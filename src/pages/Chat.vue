@@ -68,6 +68,8 @@
                 id="text"
                 type="text"
                 class="w-full focus:outline-none focus:placeholder-gray-400 text-gray-600 placeholder-gray-600 pl-12 bg-gray-200 rounded-md py-3"
+                @input="(e) => (textMessage = e.target.value)"
+                :value="textMessage"
               />
               <div
                 class="absolute right-0 items-center inset-y-0 hidden sm:flex"
@@ -129,6 +131,7 @@ export default {
   data() {
     return {
       messages: [],
+      textMessage: "",
     };
   },
   props: {
@@ -169,7 +172,9 @@ export default {
     this.$emit("countMessages", this.countMessages);
 
     connect(this.idPoputchik, (msg) => {
-      this.messages.push(msg);
+      this.messages.push(JSON.parse(msg.body));
+      //console.log("m1: " + msg.body);
+      //console.log("m2: " + this.messages[1]);
     });
   },
 
@@ -187,7 +192,8 @@ export default {
     },
 
     sendingMessage() {
-      sendMessage(this.idPoputchik);
+      sendMessage(this.idPoputchik,this.textMessage);
+
     },
   },
 };
