@@ -135,7 +135,7 @@ export default {
     chatName: String,
     idPoputchik: Number,
   },
-  emits:{close:null, countMessages:null},
+  emits: { close: null, countMessages: null },
 
   mounted() {
     viewMessages(
@@ -168,14 +168,15 @@ export default {
 
     this.$emit("countMessages", this.countMessages);
 
-    connect(this.idPoputchik);
+    connect(this.idPoputchik, (msg) => {
+      this.messages.push(msg);
+    });
   },
 
   methods: {
-
-      close(){
-          this.$emit("close");
-      },
+    close() {
+      this.$emit("close");
+    },
 
     settingConnected() {
       setConnected();
@@ -187,15 +188,6 @@ export default {
 
     sendingMessage() {
       sendMessage(this.idPoputchik);
-      viewMessages(
-      this.idPoputchik,
-      (data) => {
-        this.messages = data;
-      },
-      () => {
-        this.messages = "";
-      }
-    );
     },
   },
 };
