@@ -116,7 +116,7 @@
                   @input="(e) => (makeTripFinishDate = e.target.value)"
                 />
               </div>
-              <p>{{ errorTrip }}</p>
+              <p class="text-red-600">{{ errorTrip }}</p>
 
               <div class="flex items-center justify-start w-full">
                 <button
@@ -576,6 +576,7 @@
               tabindex="0"
               aria-label="Enter first name"
               class="w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"
+              @input="(e) => (editName = e.target.value)"
               :value="`${user.name}`"
             />
           </div>
@@ -598,13 +599,10 @@
             <label class="mb-3 text-sm leading-none text-gray-800"
               >Email Address</label
             >
-            <input
-              type="email"
-              tabindex="0"
-              aria-label="Enter email Address"
+            <div
               class="w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"
-              :value="`${user.email}`"
-            />
+            > {{user.email}}
+            </div>
           </div>
           <div class="flex flex-col md:ml-12 md:mt-0 mt-8">
             <label class="mb-3 text-sm leading-none text-gray-800"
@@ -614,6 +612,7 @@
               tabindex="0"
               aria-label="Enter phone number"
               class="w-64 bg-gray-100 text-sm font-medium leading-none text-gray-800 p-3 border rounded border-gray-200"
+              @input="(e) => (editPhoneNumber = e.target.value)"
               :value="`${user.phoneNumber}`"
             />
           </div>
@@ -626,7 +625,7 @@
         >
           <span
             class="text-sm font-medium text-center text-gray-800 capitalize"
-            @click="(user.surname = editSurname), editingUser()"
+            @click="editingUser()"
             >Save info</span
           >
         </button>
@@ -1028,6 +1027,8 @@ export default {
       },
 
       editSurname: "",
+      editName:"",
+      editPhoneNumber:"",
 
       makeNewTripStartPoints: [],
       makeNewTripFinishPoints: [],
@@ -1267,9 +1268,9 @@ export default {
 
     editingUser() {
       editUser(
-        this.user.name,
-        this.user.surname,
-        this.user.phoneNumber,
+        this.editName,
+        this.editSurname,
+        this.editPhoneNumber,
         (data) => {
           this.user = data;
         },
@@ -1278,6 +1279,14 @@ export default {
           this.error = error.message;
         }
       );
+      getUser(
+      (data) => {
+        this.user = data;
+      },
+      () => {
+        this.signIn();
+      }
+    );
     },
 
     updateResults2() {

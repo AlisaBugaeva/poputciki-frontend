@@ -118,7 +118,7 @@
                     @input="(e) => (makeTripFinishDate = e.target.value)"
                   />
                 </div>
-                <p>{{ errorTrip }}</p>
+                <p class="text-red-600">{{ errorTrip }}</p>
 
                 <div class="flex items-center justify-start w-full">
                   <button
@@ -237,7 +237,7 @@
                 </h3>
                 <div
                   class="cursor-pointer absolute top-0 right-0 mt-4 mr-5 text-gray-700 hover:text-gray-500 transition duration-150 ease-in-out"
-                  @click="fadeOut()"
+                  @click="fadeOut(), isError=false "
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -536,24 +536,6 @@
             <!-- Code block starts -->
             <div class="flex flex-col md:py-0 py-1">
               <div class="relative">
-                <div
-                  class="absolute text-gray-600 dark:text-gray-400 flex items-center px-2 border-r dark:border-gray-700 h-full cursor-pointer"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
                 <input
                   class="text-gray-600 dark:text-gray-400 focus:outline-none focus:border focus:border-indigo-700 dark:focus:border-indigo-700 dark:border-gray-700 dark:bg-gray-800 bg-white font-normal w-64 h-10 flex items-center pl-16 text-sm border-gray-300 rounded border shadow"
                   type="date"
@@ -635,6 +617,7 @@
                 </td>
                 <td class="pl-5">
                   <button
+                    v-if="t.userId != user.id"
                     class="focus:ring-2 focus:ring-offset-2 focus:ring-green-500 text-sm leading-none text-gray-600 py-3 px-5 bg-gray-100 rounded hover:bg-gray-200 focus:outline-none"
                     @click="(idJoin = `${t.id}`), joinThistrip()"
                   >
@@ -848,9 +831,8 @@ export default {
       (data) => {
         this.countMessages = data;
       },
-      (error) => {
-        this.isError = true;
-        this.error = error.message;
+      () => {
+        this.countMessages = 0;
       }
     );
   },
@@ -900,7 +882,7 @@ export default {
         },
         (error) => {
           this.isError = true;
-          this.error = error.errorMessage;
+          this.error = error.response.data.errorMessage;
         }
       );
     },
@@ -922,6 +904,7 @@ export default {
     },
 
     joinThistrip() {
+      if (this.user) {
       joinTheTrip(
         this.idJoin,
         () => {
@@ -932,6 +915,10 @@ export default {
           this.error = error.message;
         }
       );
+      }
+      else {
+        this.signIn();
+      }
     },
 
     doLogout() {

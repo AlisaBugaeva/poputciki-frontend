@@ -190,8 +190,10 @@ export default {
     },
 
     sendingMessage() {
+      if(this.textMessage!=""){
       sendMessage(this.idPoputchik, this.textMessage);
       this.textMessage = "";
+      }
     },
   },
 };
