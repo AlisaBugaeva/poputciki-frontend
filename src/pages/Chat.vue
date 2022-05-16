@@ -138,7 +138,7 @@ export default {
     idPoputchik: Number,
     userId: Number,
   },
-  emits: { close: null, countMessages: null },
+  emits: { close: null, countMessages: false },
 
   mounted() {
     viewMessages(

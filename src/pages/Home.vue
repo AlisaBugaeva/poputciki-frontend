@@ -353,7 +353,7 @@
                 </svg>
                 <div
                   class="w-2 h-2 rounded-full bg-red-400 border border-white absolute inset-0 mt-1 mr-1 m-auto"
-                  v-if="countMessages!=0"
+                  v-if="countMessages"
                 ></div>
               </div>
             </div>
@@ -741,7 +741,6 @@ import {
   makeNewTrip,
   logout,
   joinTheTrip,
-  countUnreadMessages,
 } from "../api/api";
 
 require("vue-events");
@@ -792,7 +791,7 @@ export default {
       isError: false,
 
       idJoin: 0,
-      countMessages:0,
+      countMessages:false,
     };
   },
 
@@ -827,14 +826,6 @@ export default {
       }
     );
 
-    countUnreadMessages(
-      (data) => {
-        this.countMessages = data;
-      },
-      () => {
-        this.countMessages = 0;
-      }
-    );
   },
 
   watch: {

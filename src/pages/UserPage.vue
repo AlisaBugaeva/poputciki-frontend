@@ -394,7 +394,7 @@
               </svg>
               <div
                 class="w-2 h-2 rounded-full bg-red-400 border border-white absolute inset-0 mt-1 mr-1 m-auto"
-                v-if="countMessages != 0"
+                v-if="countMessages"
               ></div>
             </div>
           </div>
@@ -1000,7 +1000,6 @@ import {
   getUserRequests,
   getAcceptedRequests,
   viewDialogs,
-  countUnreadMessages,
 } from "../api/api";
 
 export default {
@@ -1055,7 +1054,7 @@ export default {
       poputchiki: [],
 
       chatName: "",
-      countMessages: 0,
+      countMessages: false,
     };
   },
 
@@ -1065,9 +1064,7 @@ export default {
       (data) => {
         this.dialogs = data;
       },
-      (error) => {
-        this.isError = true;
-        this.error = error.message;
+      () => {
       }
     );
 
@@ -1103,16 +1100,6 @@ export default {
     getAcceptedRequests(
       (data) => {
         this.acceptedRequests = data;
-      },
-      (error) => {
-        this.isError = true;
-        this.error = error.message;
-      }
-    );
-
-    countUnreadMessages(
-      (data) => {
-        this.countMessages = data;
       },
       (error) => {
         this.isError = true;
@@ -1279,14 +1266,14 @@ export default {
           this.error = error.message;
         }
       );
-      getUser(
+      /*getUser(
       (data) => {
         this.user = data;
       },
       () => {
         this.signIn();
       }
-    );
+    );*/
     },
 
     updateResults2() {
